@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Navbar from './Navbar';
 import 'bulma/css/bulma.min.css';
 
 const Layout = (props) => {
@@ -8,7 +9,8 @@ const Layout = (props) => {
                 <meta name='viewport' content='width=device-width, initial-scale=1' />
                 <title>{props.title} - Front</title>
             </Head>
-            <div className='container'>{props.children}</div>
+            <Navbar />
+            <div className='container mt-3'>{props.children}</div>
         </>
     );
 };
