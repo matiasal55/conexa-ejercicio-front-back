@@ -1,5 +1,4 @@
 import Layout from '../components/Layout';
-import Loader from 'react-loaders';
 import { getRequest } from '../utils/requestHandler';
 
 const Posts = (props) => {
