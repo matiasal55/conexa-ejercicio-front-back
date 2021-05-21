@@ -1,7 +1,6 @@
 const router = require('./router');
+const { getPosts } = require('../controller/posts.controller');
 
-router.get('/', (req, res) => {
-    res.send('Hola desde Posts');
-});
+router.get('/', getPosts);
 
 module.exports = router;
