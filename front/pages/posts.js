@@ -35,9 +35,9 @@ const Posts = (props) => {
     );
 };
 
-Posts.getInitialProps = async (ctx) => {
+export const getStaticProps = async (ctx) => {
     const res = await getRequest('http://localhost:4000/posts');
-    return { posts: res.posts };
+    return { props: { posts: res.posts } };
 };
 
 export default Posts;
