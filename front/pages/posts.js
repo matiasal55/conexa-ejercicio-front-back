@@ -1,16 +1,11 @@
-import Head from 'next/head';
+import Layout from '../components/Layout';
 import { getRequest } from '../utils/requestHandler';
-import 'bulma/css/bulma.min.css';
 
 const Posts = (props) => {
     return (
-        <>
-            <Head>
-                <meta name='viewport' content='width=device-width, initial-scale=1' />
-                <title>Posts</title>
-            </Head>
+        <Layout title='Posts'>
             <h1 className='container'>Posts</h1>
-        </>
+        </Layout>
     );
 };
 
