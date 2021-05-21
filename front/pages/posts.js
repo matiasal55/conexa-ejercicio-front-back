@@ -5,7 +5,7 @@ import { getRequest } from '../utils/requestHandler';
 const Posts = (props) => {
     const posts = props.posts;
 
-    const table = (posts) => {
+    const table = () => {
         return (
             <table className='table mt-5'>
                 <thead>
@@ -16,9 +16,6 @@ const Posts = (props) => {
                 </thead>
                 <tbody>
                     {posts.map((post) => {
-                        {
-                            console.log(post);
-                        }
                         return (
                             <tr key={post.id}>
                                 <td>{post.id}</td>
@@ -34,7 +31,7 @@ const Posts = (props) => {
     return (
         <Layout title='Posts'>
             <h1 className='container'>Posts</h1>
-            {posts ? table(posts) : <h2>Cargando...</h2>}
+            {posts ? table() : <h2>Cargando...</h2>}
         </Layout>
     );
 };
