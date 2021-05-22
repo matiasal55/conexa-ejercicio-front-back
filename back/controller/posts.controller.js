@@ -1,4 +1,4 @@
-const { getRequest } = require('../utils/requestHandler');
+const { getRequest } = require('../services/requestHandler');
 
 const getPosts = async (req, res) => {
     const page = req.params.page;

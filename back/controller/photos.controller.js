@@ -1,4 +1,4 @@
-const { getRequest } = require('../utils/requestHandler');
+const { getRequest } = require('../services/requestHandler');
 
 const getPhotos = async (req, res) => {
     const page = req.params.page;
