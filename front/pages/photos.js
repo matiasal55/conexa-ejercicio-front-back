@@ -15,33 +15,36 @@ const Photos = (props) => {
 
     const table = () => {
         return (
-            <table className='table mt-5'>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {photos.map((photo) => (
-                        <tr key={photo.id}>
-                            <td>{photo.id}</td>
-                            <td>{photo.title}</td>
-                            <td>
-                                <img src={photo.thumbnailUrl} alt={photo.title} />
-                            </td>
+            <div>
+                <table className='table mt-5 is-hoverable is-fullwidth'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Image</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {photos.map((photo) => (
+                            <tr key={photo.id}>
+                                <td className='is-vcentered'>{photo.id}</td>
+                                <td className='is-vcentered'>{photo.title}</td>
+                                <td className='is-vcentered'>
+                                    <img src={photo.thumbnailUrl} alt={photo.title} />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
+            </div>
         );
     };
+
     return (
         <Layout title='Photos'>
-            <h1 className='container'>Photos</h1>
+            <h1 className='is-size-1'>Photos</h1>
             {photos.length > 0 ? table() : <h2>No hay fotos</h2>}
-            <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
         </Layout>
     );
 };
