@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import Input from '../components/Input';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { token, userData, login } from '../features/userSlice';
+import { useRouter } from 'next/router';
 
 const schema = yup.object().shape({
     email: yup.string().email('El formato de email es inválido').required('Debe ingresar un email válido'),
@@ -16,9 +19,15 @@ const Index = () => {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const tokenState = useSelector(token);
+
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(login(data));
     };
+
+    if (tokenState) router.push('/posts');
 
     return (
         <Layout title='Home'>
@@ -46,8 +55,8 @@ const Index = () => {
                         icon='fas fa-lock'
                         error={errors.password}
                     />
+                    {tokenState == false ? <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p> : null}
                     <button className='button is-info'>Login</button>
-                    {console.log(errors)}
                 </form>
             </div>
         </Layout>
