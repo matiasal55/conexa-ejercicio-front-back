@@ -1,7 +1,9 @@
 const { getRequest } = require('../utils/requestHandler');
 
 const getPosts = async (req, res) => {
-    const request = await getRequest('https://jsonplaceholder.typicode.com/posts');
+    const page = req.params.page;
+    const limit = 10;
+    const request = await getRequest(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`);
     const posts = request.data;
     res.json({ posts });
 };

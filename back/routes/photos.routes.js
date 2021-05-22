@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { getPhotos } = require('../controller/photos.controller');
 
-router.get('/', getPhotos);
+router.get('/:page', getPhotos);
 
 module.exports = router;
