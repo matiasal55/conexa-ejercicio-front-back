@@ -6,30 +6,33 @@ export const postsSlice = createSlice({
     initialState: {
         postsList: [],
         lengthList: 0,
+        serverState: true,
     },
     reducers: {
         setPostsList: (state, action) => {
-            state.postsList = action.payload;
+            state.postsList = action.payload.posts;
+            state.lengthList = action.payload.length;
+            state.serverState = true;
         },
-        setLengthList: (state, action) => {
-            state.lengthList = action.payload;
+        setServerState: (state, action) => {
+            state.serverState = action.payload;
         },
     },
 });
 
-export const { setPostsList, setLengthList } = postsSlice.actions;
+export const { setPostsList, setServerState } = postsSlice.actions;
 
 export const getPosts = (page) => async (dispatch) => {
     try {
         const request = await getRequest('http://localhost:4000/posts/' + page);
-        dispatch(setPostsList(request.posts));
-        dispatch(setLengthList(request.maxSize));
+        dispatch(setPostsList({ posts: request.posts, length: request.maxSize }));
     } catch (e) {
-        dispatch(setPostsList([]));
+        dispatch(setServerState(false));
     }
 };
 
 export const postsList = (state) => state.posts.postsList;
 export const lengthList = (state) => state.posts.lengthList;
+export const serverState = (state) => state.posts.serverState;
 
 export default postsSlice.reducer;
