@@ -42,8 +42,6 @@ const Photos = (props) => {
         </div>
     );
 
-    console.log(server);
-
     return (
         <Layout title='Photos'>
             <h1 className='is-size-1'>Photos</h1>
