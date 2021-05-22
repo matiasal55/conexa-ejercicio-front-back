@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { photosList, getPhotos } from '../features/photosSlice';
 import Layout from '../components/Layout';
-import { getRequest } from '../utils/requestHandler';
+import { useEffect } from 'react';
 
 const Photos = (props) => {
-    const photos = props.photo;
+    const dispatch = useDispatch();
+    const photos = useSelector(photosList);
+
+    useEffect(() => {
+        dispatch(getPhotos());
+    }, []);
 
     const table = () => {
         return (
@@ -32,14 +38,9 @@ const Photos = (props) => {
     return (
         <Layout title='Photos'>
             <h1 className='container'>Photos</h1>
-            {photos ? table() : <h2>No hay fotos</h2>}
+            {photos.length > 0 ? table() : <h2>No hay fotos</h2>}
         </Layout>
     );
-};
-
-export const getStaticProps = async (ctx) => {
-    const res = await getRequest('http://localhost:4000/photos');
-    return { props: { photos: res.photos } };
 };
 
 export default Photos;

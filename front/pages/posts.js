@@ -1,8 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
-import { getRequest } from '../utils/requestHandler';
+import { postsList, getPosts } from '../features/postsSlice';
+import { useEffect } from 'react';
 
 const Posts = (props) => {
-    const posts = props.posts;
+    const dispatch = useDispatch();
+    const posts = useSelector(postsList);
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, []);
 
     const table = () => {
         return (
@@ -30,14 +37,9 @@ const Posts = (props) => {
     return (
         <Layout title='Posts'>
             <h1 className='container'>Posts</h1>
-            {posts ? table() : <h2>Cargando...</h2>}
+            {posts.length > 0 ? table() : <h2>Cargando...</h2>}
         </Layout>
     );
-};
-
-export const getStaticProps = async (ctx) => {
-    const res = await getRequest('http://localhost:4000/posts');
-    return { props: { posts: res.posts } };
 };
 
 export default Posts;

@@ -16,8 +16,14 @@ export const photosSlice = createSlice({
 export const { setPhotosList } = photosSlice.actions;
 
 export const getPhotos = () => async (dispatch) => {
-    const request = await getRequest('http://localhost:4000/photos');
-    dispatch(setPhotosList(request.photos));
+    try {
+        const request = await getRequest('http://localhost:4000/photos');
+        dispatch(setPhotosList(request.photos));
+    } catch (e) {
+        dispatch(setPhotosList([]));
+    }
 };
+
+export const photosList = (state) => state.photos.photosList;
 
 export default photosSlice.reducer;

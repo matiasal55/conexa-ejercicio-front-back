@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getRequest } from '../utils/requestHandler';
 
-const postsSlice = createSlice({
+export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         postsList: [],
@@ -17,7 +17,7 @@ export const { setPostsList } = postsSlice.actions;
 
 export const getPosts = () => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/photos');
+        const request = await getRequest('http://localhost:4000/posts');
         dispatch(setPostsList(request.posts));
     } catch (e) {
         dispatch(setPostsList([]));
