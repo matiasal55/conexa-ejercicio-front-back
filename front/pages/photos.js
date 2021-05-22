@@ -25,7 +25,7 @@ const Photos = (props) => {
                 </thead>
                 <tbody>
                     {photos.map((photo) => (
-                        <tr>
+                        <tr key={photo.id}>
                             <td>{photo.id}</td>
                             <td>{photo.title}</td>
                             <td>
