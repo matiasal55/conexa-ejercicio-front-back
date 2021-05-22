@@ -17,7 +17,7 @@ export const { setPostsList } = postsSlice.actions;
 
 export const getPosts = () => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/posts');
+        const request = await getRequest('http://localhost:4000/posts/1');
         dispatch(setPostsList(request.posts));
     } catch (e) {
         dispatch(setPostsList([]));

@@ -17,7 +17,7 @@ export const { setPhotosList } = photosSlice.actions;
 
 export const getPhotos = () => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/photos');
+        const request = await getRequest('http://localhost:4000/photos/1');
         dispatch(setPhotosList(request.photos));
     } catch (e) {
         dispatch(setPhotosList([]));
