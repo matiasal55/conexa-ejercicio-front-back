@@ -25,7 +25,6 @@ export const { setPhotosList, setServerState } = photosSlice.actions;
 export const getPhotos = (page) => async (dispatch) => {
     try {
         const request = await getRequest('http://localhost:4000/photos/' + page);
-        dispatch(setServerState(true));
         dispatch(setPhotosList({ photos: request.photos, length: request.maxSize }));
     } catch (e) {
         dispatch(setServerState(false));
@@ -34,6 +33,6 @@ export const getPhotos = (page) => async (dispatch) => {
 
 export const photosList = (state) => state.photos.photosList;
 export const lengthList = (state) => state.photos.lengthList;
-export const serverState = (state) => state.user.serverState;
+export const serverState = (state) => state.photos.serverState;
 
 export default photosSlice.reducer;

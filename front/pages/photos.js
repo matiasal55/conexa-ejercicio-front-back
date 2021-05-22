@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
+import InternalError from '../components/InternalError';
 
 const Photos = (props) => {
     const dispatch = useDispatch();
@@ -41,12 +42,12 @@ const Photos = (props) => {
         </div>
     );
 
-    if (!server) return <p>Me caí</p>;
+    console.log(server);
 
     return (
         <Layout title='Photos'>
             <h1 className='is-size-1'>Photos</h1>
-            {photos.length > 0 ? table() : <Spinner />}
+            {photos.length > 0 ? table() : server ? <Spinner /> : <InternalError />}
         </Layout>
     );
 };

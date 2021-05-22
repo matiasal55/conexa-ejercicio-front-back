@@ -4,6 +4,7 @@ import { postsList, getPosts, lengthList, serverState } from '../features/postsS
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
+import InternalError from '../components/InternalError';
 
 const Posts = (props) => {
     const dispatch = useDispatch();
@@ -41,12 +42,10 @@ const Posts = (props) => {
         </div>
     );
 
-    if (!server) return <p>Me caí</p>;
-
     return (
         <Layout title='Posts'>
             <h1 className='is-size-1'>Posts</h1>
-            {posts.length > 0 ? table() : <Spinner />}
+            {posts.length > 0 ? table() : server ? <Spinner /> : <InternalError />}
         </Layout>
     );
 };
