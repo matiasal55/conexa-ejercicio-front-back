@@ -13,7 +13,7 @@ const Photos = (props) => {
     const server = useSelector(serverState);
 
     useEffect(() => {
-        dispatch(getPhotos());
+        dispatch(getPhotos(1));
     }, []);
 
     const table = () => (
