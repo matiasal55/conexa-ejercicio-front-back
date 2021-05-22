@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { postsList, getPosts, lengthList } from '../features/postsSlice';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
+import Spinner from '../components/Spinner';
 
 const Posts = (props) => {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Posts = (props) => {
     return (
         <Layout title='Posts'>
             <h1 className='is-size-1'>Posts</h1>
-            {posts.length > 0 ? table() : <h2>Cargando...</h2>}
+            {posts.length > 0 ? table() : <Spinner />}
         </Layout>
     );
 };

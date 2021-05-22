@@ -3,6 +3,7 @@ import { photosList, getPhotos, lengthList } from '../features/photosSlice';
 import Layout from '../components/Layout';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
+import Spinner from '../components/Spinner';
 
 const Photos = (props) => {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Photos = (props) => {
     return (
         <Layout title='Photos'>
             <h1 className='is-size-1'>Photos</h1>
-            {photos.length > 0 ? table() : <h2>No hay fotos</h2>}
+            {photos.length > 0 ? table() : <Spinner />}
         </Layout>
     );
 };
