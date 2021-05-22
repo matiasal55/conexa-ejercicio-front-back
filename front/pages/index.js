@@ -1,13 +1,20 @@
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
 import Input from '../components/Input';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = yup.object().shape({
+    email: yup.string().email('El formato de email es inválido').required('Debe ingresar un email válido'),
+    password: yup.string().required('Debe ingresar una contraseña'),
+});
 
 const Index = () => {
     const {
         handleSubmit,
         register,
         formState: { errors },
-    } = useForm();
+    } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = (data) => {
         console.log(data);
