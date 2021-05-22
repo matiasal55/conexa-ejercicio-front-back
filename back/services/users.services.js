@@ -1,5 +1,7 @@
+const { getUserForLogin } = require('../repositories/users.repository');
+
 const login = (data) => {
-    const request = data;
+    const request = getUserForLogin(data);
     return request;
 };
 
