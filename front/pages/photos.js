@@ -41,7 +41,7 @@ const Photos = (props) => {
         <Layout title='Photos'>
             <h1 className='container'>Photos</h1>
             {photos.length > 0 ? table() : <h2>No hay fotos</h2>}
-            <Pagination length={lengthPhotos} />
+            <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
         </Layout>
     );
 };

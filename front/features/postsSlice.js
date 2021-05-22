@@ -19,9 +19,9 @@ export const postsSlice = createSlice({
 
 export const { setPostsList, setLengthList } = postsSlice.actions;
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/posts/1');
+        const request = await getRequest('http://localhost:4000/posts/' + page);
         dispatch(setPostsList(request.posts));
         dispatch(setLengthList(request.maxSize));
     } catch (e) {

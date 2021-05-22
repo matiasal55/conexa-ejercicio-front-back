@@ -10,7 +10,7 @@ const Posts = (props) => {
     const lengthPosts = useSelector(lengthList);
 
     useEffect(() => {
-        dispatch(getPosts());
+        dispatch(getPosts(1));
     }, []);
 
     const table = () => {
@@ -40,7 +40,7 @@ const Posts = (props) => {
         <Layout title='Posts'>
             <h1 className='container'>Posts</h1>
             {posts.length > 0 ? table() : <h2>Cargando...</h2>}
-            <Pagination length={lengthPosts} />
+            <Pagination length={lengthPosts} goToPage={(page) => dispatch(getPosts(page))} />
         </Layout>
     );
 };

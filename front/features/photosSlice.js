@@ -19,9 +19,9 @@ export const photosSlice = createSlice({
 
 export const { setPhotosList, setLengthList } = photosSlice.actions;
 
-export const getPhotos = () => async (dispatch) => {
+export const getPhotos = (page) => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/photos/1');
+        const request = await getRequest('http://localhost:4000/photos/' + page);
         dispatch(setPhotosList(request.photos));
         dispatch(setLengthList(request.maxSize));
     } catch (e) {
