@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
-import { postsList, getPosts } from '../features/postsSlice';
+import { postsList, getPosts, lengthList } from '../features/postsSlice';
 import { useEffect } from 'react';
+import Pagination from '../components/Pagination';
 
 const Posts = (props) => {
     const dispatch = useDispatch();
     const posts = useSelector(postsList);
+    const lengthPosts = useSelector(lengthList);
 
     useEffect(() => {
         dispatch(getPosts());
@@ -38,6 +40,7 @@ const Posts = (props) => {
         <Layout title='Posts'>
             <h1 className='container'>Posts</h1>
             {posts.length > 0 ? table() : <h2>Cargando...</h2>}
+            <Pagination length={lengthPosts} />
         </Layout>
     );
 };
