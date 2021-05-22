@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 const Navbar = () => {
+    const [isActive, setIsActive] = useState(false);
     return (
         <nav className='navbar is-warning' role='navigation' aria-label='main navigation'>
             <div className='navbar-brand'>
@@ -9,13 +11,20 @@ const Navbar = () => {
                         <img src='https://conexa.ai/wp-content/uploads/2021/03/logo.svg' width={112} height={28} />
                     </a>
                 </Link>
-                <a role='button' className='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
+                <a
+                    role='button'
+                    onClick={() => setIsActive(!isActive)}
+                    className={`navbar-burger burger${isActive ? ' is-active' : ''}`}
+                    aria-label='menu'
+                    aria-expanded='false'
+                    data-target='navbarBasicExample'
+                >
                     <span aria-hidden='true' />
                     <span aria-hidden='true' />
                     <span aria-hidden='true' />
                 </a>
             </div>
-            <div id='navbarBasicExample' className='navbar-menu'>
+            <div id='navbarBasicExample' className={`navbar-menu${isActive ? ' is-active' : ''}`}>
                 <div className='navbar-start'>
                     <Link href='/posts'>
                         <a className='navbar-item'>Posts</a>
