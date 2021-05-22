@@ -14,33 +14,31 @@ const Posts = (props) => {
         dispatch(getPosts(1));
     }, []);
 
-    const table = () => {
-        return (
-            <div>
-                <table className='table mt-5 is-hoverable is-fullwidth'>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Body</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {posts.map((post) => {
-                            return (
-                                <tr key={post.id}>
-                                    <td className='is-vcentered'>{post.id}</td>
-                                    <td className='is-vcentered'>{post.title}</td>
-                                    <td className='is-vcentered'>{post.body}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <Pagination length={lengthPosts} goToPage={(page) => dispatch(getPosts(page))} />
-            </div>
-        );
-    };
+    const table = () => (
+        <div>
+            <table className='table mt-5 is-hoverable is-fullwidth'>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {posts.map((post) => {
+                        return (
+                            <tr key={post.id}>
+                                <td className='is-vcentered'>{post.id}</td>
+                                <td className='is-vcentered'>{post.title}</td>
+                                <td className='is-vcentered'>{post.body}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            <Pagination length={lengthPosts} goToPage={(page) => dispatch(getPosts(page))} />
+        </div>
+    );
 
     return (
         <Layout title='Posts'>
