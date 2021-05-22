@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
-import { postsList, getPosts, lengthList } from '../features/postsSlice';
+import { postsList, getPosts, lengthList, serverState } from '../features/postsSlice';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner';
 const Posts = (props) => {
     const dispatch = useDispatch();
     const posts = useSelector(postsList);
+    const server = useSelector(serverState);
     const lengthPosts = useSelector(lengthList);
 
     useEffect(() => {
@@ -39,6 +40,8 @@ const Posts = (props) => {
             <Pagination length={lengthPosts} goToPage={(page) => dispatch(getPosts(page))} />
         </div>
     );
+
+    if (!server) return <p>Me caí</p>;
 
     return (
         <Layout title='Posts'>

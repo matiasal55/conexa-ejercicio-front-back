@@ -4,7 +4,7 @@ import Input from '../components/Input';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { token, userData, login } from '../features/userSlice';
+import { token, login, serverState } from '../features/userSlice';
 import { useRouter } from 'next/router';
 
 const schema = yup.object().shape({
@@ -22,6 +22,7 @@ const Index = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const tokenState = useSelector(token);
+    const server = useSelector(serverState);
 
     const onSubmit = (data) => {
         dispatch(login(data));
@@ -55,7 +56,11 @@ const Index = () => {
                         icon='fas fa-lock'
                         error={errors.password}
                     />
-                    {tokenState == false ? <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p> : null}
+                    {tokenState == false ? (
+                        <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p>
+                    ) : !server ? (
+                        <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>
+                    ) : null}
                     <button className='button is-info'>Login</button>
                 </form>
             </div>

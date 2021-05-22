@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { photosList, getPhotos, lengthList } from '../features/photosSlice';
+import { photosList, getPhotos, lengthList, serverState } from '../features/photosSlice';
 import Layout from '../components/Layout';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
@@ -9,6 +9,7 @@ const Photos = (props) => {
     const dispatch = useDispatch();
     const photos = useSelector(photosList);
     const lengthPhotos = useSelector(lengthList);
+    const server = useSelector(serverState);
 
     useEffect(() => {
         dispatch(getPhotos());
@@ -39,6 +40,8 @@ const Photos = (props) => {
             <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
         </div>
     );
+
+    if (!server) return <p>Me caí</p>;
 
     return (
         <Layout title='Photos'>
