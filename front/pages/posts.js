@@ -20,6 +20,7 @@ const Posts = (props) => {
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
+                        <th>Body</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@ const Posts = (props) => {
                             <tr key={post.id}>
                                 <td>{post.id}</td>
                                 <td>{post.title}</td>
+                                <td>{post.body}</td>
                             </tr>
                         );
                     })}
