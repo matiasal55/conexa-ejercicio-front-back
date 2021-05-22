@@ -3,6 +3,7 @@ const logger = require('morgan');
 
 const postsRouter = require('./routes/posts.routes');
 const photosRouter = require('./routes/photos.routes');
+const usersRouter = require('./routes/users.routes');
 const cors = require('cors');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/posts', postsRouter);
 app.use('/photos', photosRouter);
+app.use('/users', usersRouter);
 
 app.use((req, res) => {
     res.status(400).json({ message: 'Bad request' });
