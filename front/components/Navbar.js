@@ -1,17 +1,20 @@
 import Link from 'next/link';
+import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { existsToken, logout } from '../features/userSlice';
+import { useDispatch } from 'react-redux';
+import { logout } from '../features/userSlice';
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
-    const tokenState = useSelector(existsToken);
+    const [cookies, setCookies, removeCookies] = useCookies(['conexaSession']);
     const dispatch = useDispatch();
     const router = useRouter();
+    const cookieSession = cookies.conexaSession;
 
     const endSession = () => {
         dispatch(logout());
+        removeCookies('conexaSession');
         router.push('/');
     };
 
@@ -23,7 +26,7 @@ const Navbar = () => {
                         <img src='https://conexa.ai/wp-content/uploads/2021/03/logo.svg' width={112} height={28} />
                     </a>
                 </Link>
-                {tokenState ? (
+                {cookieSession ? (
                     <a
                         role='button'
                         onClick={() => setIsActive(!isActive)}
@@ -38,7 +41,7 @@ const Navbar = () => {
                     </a>
                 ) : null}
             </div>
-            {tokenState ? (
+            {cookieSession ? (
                 <div id='navbarBasicExample' className={`navbar-menu${isActive ? ' is-active' : ''}`}>
                     <div className='navbar-start'>
                         <Link href='/posts'>
