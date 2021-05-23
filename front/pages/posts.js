@@ -15,6 +15,9 @@ const Posts = (props) => {
     const router = useRouter();
 
     useEffect(() => {
+        if (!userToken) {
+            return router.push('/');
+        }
         dispatch(getPosts(userToken));
     }, []);
 
@@ -43,14 +46,18 @@ const Posts = (props) => {
         </div>
     );
 
-    if (!userToken) {
-        router.push('/');
-    }
-
     return (
         <Layout title='Posts'>
-            <h1 className='is-size-1'>Posts</h1>
-            {posts.length > 0 ? table() : server ? <Spinner /> : <InternalError />}
+            {posts.length > 0 ? (
+                <>
+                    <h1 className='is-size-1'>Posts</h1>
+                    {table()}
+                </>
+            ) : server ? (
+                <Spinner />
+            ) : (
+                <InternalError />
+            )}
         </Layout>
     );
 };

@@ -17,6 +17,9 @@ const Photos = (props) => {
     const router = useRouter();
 
     useEffect(() => {
+        if (!userToken) {
+            router.push('/');
+        }
         dispatch(getPhotos(1, userToken));
     }, []);
 
@@ -46,14 +49,18 @@ const Photos = (props) => {
         </div>
     );
 
-    if (!userToken) {
-        router.push('/');
-    }
-
     return (
         <Layout title='Photos'>
-            <h1 className='is-size-1'>Photos</h1>
-            {photos.length > 0 ? table() : server ? <Spinner /> : <InternalError />}
+            {photos.length > 0 ? (
+                <>
+                    <h1 className='is-size-1'>Photos</h1>
+                    {table()}
+                </>
+            ) : server ? (
+                <Spinner />
+            ) : (
+                <InternalError />
+            )}
         </Layout>
     );
 };
