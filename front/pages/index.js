@@ -33,7 +33,9 @@ const Index = () => {
     };
 
     if (tokenState) {
-        setCookies('conexaSession', userToken);
+        setCookies('conexaSession', userToken, {
+            maxAge: 60 * 60,
+        });
     }
 
     if (cookieSession) {
