@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { postRequest } from '../utils/requestHandler';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -15,16 +16,28 @@ export const userSlice = createSlice({
             state.existsToken = true;
             state.serverState = true;
         },
+        setExistsToken: (state, action) => {
+            state.existsToken = action.payload;
+        },
         setServerState: (state, action) => {
             state.serverState = action.payload;
         },
     },
 });
 
-export const { setUserData, setServerState } = userSlice.actions;
+export const { setUserData, setServerState, setExistsToken } = userSlice.actions;
 
-export const login = (data) => (dispatch) => {
-    dispatch(setUserData({ userData: data, token: '12345' }));
+export const login = (data) => async (dispatch) => {
+    try {
+        const request = await postRequest('http://localhost:4000/users/login', data);
+        if (request) {
+            dispatch(setUserData({ userData: request.user, token: request.token }));
+        } else {
+            dispatch(setExistsToken(false));
+        }
+    } catch (e) {
+        dispatch(setServerState(false));
+    }
 };
 
 export const token = (state) => state.user.existsToken;
