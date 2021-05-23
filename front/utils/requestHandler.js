@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const getRequest = async (route) => {
-    const request = await axios.get(route);
+export const getRequest = async (route, headers = {}) => {
+    const request = await axios.get(route, { headers });
     return request.data;
 };
 
