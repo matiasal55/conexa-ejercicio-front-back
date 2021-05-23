@@ -1,8 +1,8 @@
 const { login } = require('../services/users.services');
 
-const loginUser = (req, res) => {
+const loginUser = async (req, res) => {
     const data = req.body;
-    const request = login(data);
+    const request = await login(data);
     return res.status(200).json(request);
 };
 
