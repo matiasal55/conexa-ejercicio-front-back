@@ -1,10 +1,11 @@
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 import Input from '../components/Input';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { existsToken, login, serverState } from '../features/userSlice';
+import { existsToken, login, serverState, token } from '../features/userSlice';
 import { useRouter } from 'next/router';
 
 const schema = yup.object().shape({
@@ -23,12 +24,21 @@ const Index = () => {
     const dispatch = useDispatch();
     const tokenState = useSelector(existsToken);
     const server = useSelector(serverState);
+    const userToken = useSelector(token);
+    const [cookies, setCookies] = useCookies(['conexaSession']);
+    const cookieSession = cookies.conexaSession;
 
     const onSubmit = (data) => {
         dispatch(login(data));
     };
 
-    if (tokenState) router.push('/posts');
+    if (tokenState) {
+        setCookies('conexaSession', userToken);
+    }
+
+    if (cookieSession) {
+        router.push('/posts');
+    }
 
     return (
         <Layout title='Home'>

@@ -1,26 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { photosList, getPhotos, lengthList, serverState } from '../features/photosSlice';
-import { token } from '../features/userSlice';
 import Layout from '../components/Layout';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import InternalError from '../components/InternalError';
 
-const Photos = (props) => {
+const Photos = () => {
     const dispatch = useDispatch();
+    const [cookies, setCookies] = useCookies(['conexaSession']);
+    const cookieSession = cookies.conexaSession;
     const photos = useSelector(photosList);
     const lengthPhotos = useSelector(lengthList);
     const server = useSelector(serverState);
-    const userToken = useSelector(token);
     const router = useRouter();
 
     useEffect(() => {
-        if (!userToken) {
+        if (!cookieSession) {
             router.push('/');
         }
-        dispatch(getPhotos(1, userToken));
+        dispatch(getPhotos(1, cookieSession));
     }, []);
 
     const table = () => (

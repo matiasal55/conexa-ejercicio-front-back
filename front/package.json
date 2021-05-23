@@ -24,6 +24,7 @@
     "bulma-pagination-react": "^0.1.1",
     "next": "^10.2.2",
     "react": "^17.0.2",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.6.4",
     "react-loader-spinner": "^4.0.0",
