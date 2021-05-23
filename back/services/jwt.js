@@ -10,4 +10,9 @@ const generateToken = (email) => {
     return token;
 };
 
-module.exports = { generateToken };
+const decodedToken = (token) => {
+    const decoded = jwt.verify(token, secret);
+    return decoded;
+};
+
+module.exports = { generateToken, decodedToken };
