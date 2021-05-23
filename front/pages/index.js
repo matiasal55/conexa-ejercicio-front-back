@@ -4,7 +4,7 @@ import Input from '../components/Input';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { token, login, serverState } from '../features/userSlice';
+import { existsToken, login, serverState } from '../features/userSlice';
 import { useRouter } from 'next/router';
 
 const schema = yup.object().shape({
@@ -21,7 +21,7 @@ const Index = () => {
 
     const router = useRouter();
     const dispatch = useDispatch();
-    const tokenState = useSelector(token);
+    const tokenState = useSelector(existsToken);
     const server = useSelector(serverState);
 
     const onSubmit = (data) => {

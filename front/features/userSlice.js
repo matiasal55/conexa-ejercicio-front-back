@@ -40,7 +40,8 @@ export const login = (data) => async (dispatch) => {
     }
 };
 
-export const token = (state) => state.user.existsToken;
+export const existsToken = (state) => state.user.existsToken;
+export const token = (state) => state.user.token;
 export const userData = (state) => state.user.userData;
 export const serverState = (state) => state.user.serverState;
 
