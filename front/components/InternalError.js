@@ -1,13 +1,12 @@
-import Image from 'next/image';
+import ErrorMessage from './ErrorMessage';
 
 const InternalError = () => {
     return (
-        <>
-            <div className='has-text-centered my-3'>
-                <Image src='/server.png' className='image is-square is-128x128' alt='Internal error' width='200' height='200' />
-                <p className='is-size-3'>Tuvimos un problema. Vuelva en unos instantes. Sepa disculpar la molestia ocasionada.</p>
-            </div>
-        </>
+        <ErrorMessage
+            image='/img/server.png'
+            alt='Internal error'
+            message='Tuvimos un problema. Vuelva en unos instantes. Sepa disculpar la molestia ocasionada.'
+        />
     );
 };
 
