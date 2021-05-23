@@ -1,19 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { postsList, getPosts, serverState } from '../features/postsSlice';
 import { useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import InternalError from '../components/InternalError';
+import { cookieProvider } from '../utils/cookieProvider';
 
 const Posts = () => {
     const dispatch = useDispatch();
     const posts = useSelector(postsList);
     const server = useSelector(serverState);
     const router = useRouter();
-    const [cookies, setCookies] = useCookies(['conexaSession']);
-    const cookieSession = cookies.conexaSession;
+    const cookieSession = cookieProvider('conexaSession');
 
     useEffect(() => {
         if (!cookieSession) {

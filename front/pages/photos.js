@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import { photosList, getPhotos, lengthList, serverState } from '../features/photosSlice';
 import Layout from '../components/Layout';
@@ -7,11 +6,11 @@ import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import InternalError from '../components/InternalError';
+import { cookieProvider } from '../utils/cookieProvider';
 
 const Photos = () => {
     const dispatch = useDispatch();
-    const [cookies, setCookies] = useCookies(['conexaSession']);
-    const cookieSession = cookies.conexaSession;
+    const cookieSession = cookieProvider('conexaSession');
     const photos = useSelector(photosList);
     const lengthPhotos = useSelector(lengthList);
     const server = useSelector(serverState);
