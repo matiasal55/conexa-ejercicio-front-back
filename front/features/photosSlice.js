@@ -30,7 +30,9 @@ export const getPhotos = (page, token) => async (dispatch) => {
         const request = await getRequest('http://localhost:4000/photos/' + page, headers);
         dispatch(setPhotosList({ photos: request.photos, length: request.maxSize }));
     } catch (e) {
-        dispatch(setServerState(false));
+        setTimeout(() => {
+            dispatch(setServerState(false));
+        }, 5000);
     }
 };
 

@@ -5,13 +5,11 @@ export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         postsList: [],
-        lengthList: 0,
         serverState: true,
     },
     reducers: {
         setPostsList: (state, action) => {
-            state.postsList = action.payload.posts;
-            state.lengthList = action.payload.length;
+            state.postsList = action.payload;
             state.serverState = true;
         },
         setServerState: (state, action) => {
@@ -22,15 +20,17 @@ export const postsSlice = createSlice({
 
 export const { setPostsList, setServerState } = postsSlice.actions;
 
-export const getPosts = (page, token) => async (dispatch) => {
+export const getPosts = (token) => async (dispatch) => {
     try {
         const headers = {
             'x-access-token': token,
         };
-        const request = await getRequest('http://localhost:4000/posts/' + page, headers);
-        dispatch(setPostsList({ posts: request.posts, length: request.maxSize }));
+        const request = await getRequest('http://localhost:4000/posts', headers);
+        dispatch(setPostsList(request));
     } catch (e) {
-        dispatch(setServerState(false));
+        setTimeout(() => {
+            dispatch(setServerState(false));
+        }, 5000);
     }
 };
 

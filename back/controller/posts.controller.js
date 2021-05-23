@@ -5,12 +5,9 @@ const getPosts = async (req, res) => {
     try {
         const token = req.headers['x-access-token'];
         const isValid = validateToken(token);
-        const page = req.params.page;
-        const limit = 10;
-        const request = await getRequest(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`);
-        const maxSize = request.headers['x-total-count'];
+        const request = await getRequest('https://jsonplaceholder.typicode.com/posts');
         const posts = request.data;
-        res.status(200).json({ posts, maxSize });
+        res.status(200).json(posts);
     } catch (e) {
         res.status(401).json({ message: 'Not Autorized' });
     }
