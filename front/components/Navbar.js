@@ -1,11 +1,19 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { existsToken } from '../features/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { existsToken, logout } from '../features/userSlice';
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
     const tokenState = useSelector(existsToken);
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const endSession = () => {
+        dispatch(logout());
+        router.push('/');
+    };
 
     return (
         <nav className='navbar is-warning' role='navigation' aria-label='main navigation'>
@@ -43,7 +51,7 @@ const Navbar = () => {
                     <div className='navbar-end'>
                         <div className='navbar-item'>
                             <div className='buttons'>
-                                <a className='button is-info'>
+                                <a className='button is-info' onClick={endSession}>
                                     <strong>Logout</strong>
                                 </a>
                             </div>

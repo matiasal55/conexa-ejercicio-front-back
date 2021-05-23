@@ -19,13 +19,17 @@ export const userSlice = createSlice({
         setExistsToken: (state, action) => {
             state.existsToken = action.payload;
         },
+        endSession: (state) => {
+            state.token = null;
+            state.existsToken = null;
+        },
         setServerState: (state, action) => {
             state.serverState = action.payload;
         },
     },
 });
 
-export const { setUserData, setServerState, setExistsToken } = userSlice.actions;
+export const { setUserData, setServerState, setExistsToken, endSession } = userSlice.actions;
 
 export const login = (data) => async (dispatch) => {
     try {
@@ -38,6 +42,10 @@ export const login = (data) => async (dispatch) => {
     } catch (e) {
         dispatch(setServerState(false));
     }
+};
+
+export const logout = () => (dispatch) => {
+    dispatch(endSession());
 };
 
 export const existsToken = (state) => state.user.existsToken;
