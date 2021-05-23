@@ -22,9 +22,12 @@ export const photosSlice = createSlice({
 
 export const { setPhotosList, setServerState } = photosSlice.actions;
 
-export const getPhotos = (page) => async (dispatch) => {
+export const getPhotos = (page, token) => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/photos/' + page);
+        const headers = {
+            'x-access-token': token,
+        };
+        const request = await getRequest('http://localhost:4000/photos/' + page, headers);
         dispatch(setPhotosList({ photos: request.photos, length: request.maxSize }));
     } catch (e) {
         dispatch(setServerState(false));

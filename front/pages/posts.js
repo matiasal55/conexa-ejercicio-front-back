@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { postsList, getPosts, lengthList, serverState } from '../features/postsSlice';
+import { token } from '../features/userSlice';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
@@ -10,10 +12,12 @@ const Posts = (props) => {
     const dispatch = useDispatch();
     const posts = useSelector(postsList);
     const server = useSelector(serverState);
+    const userToken = useSelector(token);
     const lengthPosts = useSelector(lengthList);
+    const router = useRouter();
 
     useEffect(() => {
-        dispatch(getPosts(1));
+        dispatch(getPosts(1, userToken));
     }, []);
 
     const table = () => (
@@ -41,6 +45,10 @@ const Posts = (props) => {
             <Pagination length={lengthPosts} goToPage={(page) => dispatch(getPosts(page))} />
         </div>
     );
+
+    if (!userToken) {
+        router.push('/');
+    }
 
     return (
         <Layout title='Posts'>

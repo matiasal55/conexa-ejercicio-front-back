@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import { photosList, getPhotos, lengthList, serverState } from '../features/photosSlice';
+import { token } from '../features/userSlice';
 import Layout from '../components/Layout';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
@@ -11,9 +13,11 @@ const Photos = (props) => {
     const photos = useSelector(photosList);
     const lengthPhotos = useSelector(lengthList);
     const server = useSelector(serverState);
+    const userToken = useSelector(token);
+    const router = useRouter();
 
     useEffect(() => {
-        dispatch(getPhotos(1));
+        dispatch(getPhotos(1, userToken));
     }, []);
 
     const table = () => (
@@ -41,6 +45,10 @@ const Photos = (props) => {
             <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
         </div>
     );
+
+    if (!userToken) {
+        router.push('/');
+    }
 
     return (
         <Layout title='Photos'>

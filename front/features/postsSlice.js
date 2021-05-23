@@ -22,9 +22,12 @@ export const postsSlice = createSlice({
 
 export const { setPostsList, setServerState } = postsSlice.actions;
 
-export const getPosts = (page) => async (dispatch) => {
+export const getPosts = (page, token) => async (dispatch) => {
     try {
-        const request = await getRequest('http://localhost:4000/posts/' + page);
+        const headers = {
+            'x-access-token': token,
+        };
+        const request = await getRequest('http://localhost:4000/posts/' + page, headers);
         dispatch(setPostsList({ posts: request.posts, length: request.maxSize }));
     } catch (e) {
         dispatch(setServerState(false));
