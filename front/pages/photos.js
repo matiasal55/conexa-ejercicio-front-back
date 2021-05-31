@@ -45,7 +45,7 @@ const Photos = () => {
                     ))}
                 </tbody>
             </table>
-            <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page))} />
+            <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page, cookieSession))} />
         </div>
     );
 
