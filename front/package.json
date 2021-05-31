@@ -1,7 +1,7 @@
 {
   "name": "front",
   "version": "1.0.0",
-  "description": "Ejercicio de frontend para Conexa usando React",
+  "description": "Ejercicio de frontend usando React",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -11,8 +11,7 @@
   "keywords": [
     "react",
     "reactjs",
-    "front",
-    "conexa"
+    "front"
   ],
   "author": "Matias Alarcon",
   "license": "ISC",

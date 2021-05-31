@@ -10,7 +10,7 @@ import { cookieProvider } from '../utils/cookieProvider';
 
 const Photos = () => {
     const dispatch = useDispatch();
-    const cookieSession = cookieProvider('conexaSession');
+    const cookieSession = cookieProvider('loremSession');
     const photos = useSelector(photosList);
     const lengthPhotos = useSelector(lengthList);
     const server = useSelector(serverState);

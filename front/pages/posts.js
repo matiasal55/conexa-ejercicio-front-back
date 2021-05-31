@@ -12,7 +12,7 @@ const Posts = () => {
     const posts = useSelector(postsList);
     const server = useSelector(serverState);
     const router = useRouter();
-    const cookieSession = cookieProvider('conexaSession');
+    const cookieSession = cookieProvider('loremSession');
 
     useEffect(() => {
         if (!cookieSession) {

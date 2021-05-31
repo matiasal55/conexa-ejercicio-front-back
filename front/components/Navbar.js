@@ -7,14 +7,14 @@ import { logout } from '../features/userSlice';
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
-    const [cookies, setCookies, removeCookies] = useCookies(['conexaSession']);
+    const [cookies, setCookies, removeCookies] = useCookies(['loremSession']);
     const dispatch = useDispatch();
     const router = useRouter();
-    const cookieSession = cookies.conexaSession;
+    const cookieSession = cookies.loremSession;
 
     const endSession = () => {
         dispatch(logout());
-        removeCookies('conexaSession');
+        removeCookies('loremSession');
         router.push('/');
     };
 
@@ -22,9 +22,7 @@ const Navbar = () => {
         <nav className='navbar is-warning' role='navigation' aria-label='main navigation'>
             <div className='navbar-brand'>
                 <Link href='/'>
-                    <a className='navbar-item'>
-                        <img src='https://conexa.ai/wp-content/uploads/2021/03/logo.svg' width={112} height={28} />
-                    </a>
+                    <a className='navbar-item'>Lorem Ipsum</a>
                 </Link>
                 {cookieSession ? (
                     <a

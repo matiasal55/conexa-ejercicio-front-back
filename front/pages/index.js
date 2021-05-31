@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { existsToken, login, serverState, token } from '../features/userSlice';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const schema = yup.object().shape({
     email: yup.string().email('El formato de email es inválido').required('Debe ingresar un email válido'),
@@ -25,15 +26,15 @@ const Index = () => {
     const tokenState = useSelector(existsToken);
     const server = useSelector(serverState);
     const userToken = useSelector(token);
-    const [cookies, setCookies] = useCookies(['conexaSession']);
-    const cookieSession = cookies.conexaSession;
+    const [cookies, setCookies] = useCookies(['loremSession']);
+    const cookieSession = cookies.loremSession;
 
     const onSubmit = (data) => {
         dispatch(login(data));
     };
 
     if (tokenState) {
-        setCookies('conexaSession', userToken, {
+        setCookies('loremSession', userToken, {
             maxAge: 60 * 60,
         });
     }
@@ -46,9 +47,10 @@ const Index = () => {
         <Layout title='Home'>
             <div className='has-text-centered'>
                 <div>
-                    <img src='https://conexa.ai/wp-content/uploads/2021/03/logo.svg' alt='logo-conexa' />
+                    <Image src='/img/cloud-service.png' alt='logo' width='200' height='200' />
+                    <h1 className='is-size-3'>Lorem Ipsum</h1>
                 </div>
-                <h1 className='is-size-5'>Ejercicio Front / Back</h1>
+                <h2 className='is-size-5'>Ejercicio Front / Back</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className='container has-text-left'>
                     <Input
                         label='Email'
