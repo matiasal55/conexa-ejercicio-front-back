@@ -11,8 +11,6 @@ const loginUser = async (req, res) => {
         const data = req.body;
         const user = await login(data);
         if (!user) return error(res, 'Incorrect user or password');
-        user.user.password = null;
-        user.user._id = null;
         return success(res, user);
     } catch (e) {
         return error(res, 'Internal Error', 500);
@@ -27,7 +25,6 @@ const registerUser = async (req, res) => {
         }
         const data = req.body;
         if (data.password !== data.repassword) return error(res, 'Las contraseñas no coinciden');
-        delete data.repassword;
         const user = await register(data);
         return success(res, user, 201);
     } catch (e) {

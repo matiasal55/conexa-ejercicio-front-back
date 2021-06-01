@@ -4,27 +4,33 @@ const { generateToken } = require('./jwt');
 const login = async (data) => {
     const request = await getUserForLogin(data);
     if (request) {
-        const token = generateToken(data.email);
-        const user = {
-            user: request,
-            token,
-        };
+        request.password = null;
+        request._id = null;
+        const user = getToken(request);
         return user;
     }
     return request;
 };
 
 const register = async (data) => {
+    delete data.repassword;
     const request = await saveUser(data);
     if (request) {
-        const token = generateToken(data.email);
-        const user = {
-            user: request,
-            token,
-        };
+        request.password = null;
+        request._id = null;
+        const user = getToken(request);
         return user;
     }
     return request;
+};
+
+const getToken = (data) => {
+    const token = generateToken(data.email);
+    const user = {
+        user: data,
+        token,
+    };
+    return user;
 };
 
 module.exports = { login, register };
