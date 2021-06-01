@@ -1,18 +1,22 @@
 const { validationResult } = require('express-validator');
 const { login } = require('../services/users.services');
+const { success, error } = require('../messages/resMessages');
 
 const loginUser = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ message: errors });
-    }
-    const data = req.body;
-    const user = await login(data);
-    if (user) {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return error(res, errors);
+        }
+        const data = req.body;
+        const user = await login(data);
+        if (!user) return error(res, 'Incorrect user or password');
         user.user.password = null;
         user.user._id = null;
-        return res.status(200).json(user);
-    } else res.status(400).json({ message: 'User not found' });
+        return success(res, user);
+    } catch (e) {
+        return error(res, 'Internal Error', 500);
+    }
 };
 
 module.exports = { loginUser };

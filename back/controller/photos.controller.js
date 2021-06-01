@@ -1,5 +1,6 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
+const { success, possibleNotAutorizedAccess } = require('../messages/resMessages');
 
 const getPhotos = async (req, res) => {
     try {
@@ -10,9 +11,9 @@ const getPhotos = async (req, res) => {
         const request = await getRequest(`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=${limit}`);
         const maxSize = request.headers['x-total-count'];
         const photos = request.data;
-        res.status(200).json({ photos, maxSize });
+        success(res, { photos, maxSize });
     } catch (e) {
-        res.status(401).json({ message: 'Not Autorized' });
+        possibleNotAutorizedAccess(res, e.message, 'jwt');
     }
 };
 

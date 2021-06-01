@@ -1,6 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
-
+const { error } = require('./messages/resMessages');
 const postsRouter = require('./routes/posts.routes');
 const photosRouter = require('./routes/photos.routes');
 const usersRouter = require('./routes/users.routes');
@@ -18,7 +18,7 @@ app.use('/photos', photosRouter);
 app.use('/users', usersRouter);
 
 app.use((req, res) => {
-    res.status(400).json({ message: 'Bad request' });
+    error(res, 'Bad Request');
 });
 
 module.exports = app;
