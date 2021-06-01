@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { existsToken, login, serverState, token } from '../features/userSlice';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const schema = yup.object().shape({
     email: yup.string().email('El formato de email es inválido').required('Debe ingresar un email válido'),
@@ -77,6 +78,14 @@ const Index = () => {
                     ) : null}
                     <button className='button is-info'>Login</button>
                 </form>
+                <div>
+                    <p>
+                        ¿No tenés cuenta? Registrate{' '}
+                        <Link href='/register'>
+                            <a>aquí</a>
+                        </Link>
+                    </p>
+                </div>
             </div>
         </Layout>
     );
