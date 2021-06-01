@@ -21,8 +21,7 @@ const register = async (data) => {
     if (request) {
         request.password = null;
         request._id = null;
-        const user = getToken(request);
-        return user;
+        return request;
     }
     return request;
 };
