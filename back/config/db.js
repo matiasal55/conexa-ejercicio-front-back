@@ -15,4 +15,7 @@ mongoose
 
 user.save()
     .then((res) => console.log('Usuario usuario@correo.com creado por defecto'))
-    .catch((err) => console.log('Usuario creado previamente'));
+    .catch((err) => {
+        if (err.message.includes('E11000')) console.log('Usuario creado previamente');
+        else console.log('No se pudo crear el usuario predeterminado');
+    });
