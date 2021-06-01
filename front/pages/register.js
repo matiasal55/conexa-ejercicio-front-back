@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 import Input from '../components/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerValidate } from '../utils/validations';
-import { registerUser, serverState, existsToken, registerState } from '../features/userSlice';
+import { registerUser, serverState, existsToken, registerState, loadingState, setExistsToken } from '../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { cookieProvider } from '../utils/cookieProvider';
+import Button from '../components/Button';
 
 const Register = () => {
     const {
@@ -22,6 +23,7 @@ const Register = () => {
     const tokenState = useSelector(existsToken);
     const server = useSelector(serverState);
     const registerFlag = useSelector(registerState);
+    const loading = useSelector(loadingState);
     const cookieSession = cookieProvider('loremSession');
 
     const onSubmit = (data) => {
@@ -31,6 +33,10 @@ const Register = () => {
     if (cookieSession) router.push('/posts');
 
     if (registerFlag) router.push('/');
+
+    useEffect(() => {
+        dispatch(setExistsToken(null));
+    }, []);
 
     return (
         <Layout title='Register'>
@@ -43,8 +49,17 @@ const Register = () => {
                         error={errors.firstName}
                         register={register}
                         name='firstName'
+                        disabled={loading}
                     />
-                    <Input label='Apellido' placeholder='Ingrese su apellido' icon='fas fa-user' error={errors.lastName} register={register} name='lastName' />
+                    <Input
+                        label='Apellido'
+                        placeholder='Ingrese su apellido'
+                        icon='fas fa-user'
+                        error={errors.lastName}
+                        register={register}
+                        name='lastName'
+                        disabled={loading}
+                    />
                     <Input
                         label='Email'
                         register={register}
@@ -53,6 +68,7 @@ const Register = () => {
                         placeholder='Ingrese su email'
                         icon='fas fa-envelope'
                         error={errors.email}
+                        disabled={loading}
                     />
                     <Input
                         label='Password'
@@ -62,6 +78,7 @@ const Register = () => {
                         placeholder='Ingrese su password'
                         icon='fas fa-lock'
                         error={errors.password}
+                        disabled={loading}
                     />
                     <Input
                         label='Reingrese su password'
@@ -71,8 +88,9 @@ const Register = () => {
                         placeholder='Vuelva a ingresar su password'
                         icon='fas fa-lock'
                         error={errors.repassword}
+                        disabled={loading}
                     />
-                    <button className='button is-info'>Login</button>
+                    <Button value='Registrar' loading={loading} />
                 </form>
                 <div>
                     {tokenState == false ? (

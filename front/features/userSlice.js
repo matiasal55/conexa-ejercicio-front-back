@@ -9,6 +9,7 @@ export const userSlice = createSlice({
         existsToken: null,
         serverState: true,
         register: false,
+        loading: false,
     },
     reducers: {
         setUserData: (state, action) => {
@@ -31,29 +32,37 @@ export const userSlice = createSlice({
         setRegister: (state, action) => {
             state.register = action.payload;
         },
+        setLoading: (state) => {
+            state.loading = !state.loading;
+        },
     },
 });
 
-export const { setUserData, setServerState, setExistsToken, endSession, setRegister } = userSlice.actions;
+export const { setUserData, setServerState, setExistsToken, endSession, setRegister, setLoading } = userSlice.actions;
 
 export const login = (data) => async (dispatch) => {
     try {
+        dispatch(setLoading());
         const request = await postRequest('http://localhost:4000/users/login', data);
+        dispatch(setLoading());
         dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
         if (e.response && e.response.status == 400) dispatch(setExistsToken(false));
         else dispatch(setServerState(false));
+        dispatch(setLoading());
     }
 };
 
 export const registerUser = (data) => async (dispatch) => {
     try {
+        dispatch(setLoading());
         const request = await postRequest('http://localhost:4000/users/register', data);
-        console.log(request);
+        dispatch(setLoading());
         dispatch(setRegister(true));
     } catch (e) {
         if (e.response && e.response.status == 400) dispatch(setExistsToken(false));
         else dispatch(setServerState(false));
+        dispatch(setLoading());
     }
 };
 
@@ -66,5 +75,6 @@ export const token = (state) => state.user.token;
 export const userData = (state) => state.user.userData;
 export const serverState = (state) => state.user.serverState;
 export const registerState = (state) => state.user.register;
+export const loadingState = (state) => state.user.loading;
 
 export default userSlice.reducer;

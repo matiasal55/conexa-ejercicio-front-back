@@ -1,10 +1,11 @@
 import Layout from '../components/Layout';
+import Button from '../components/Button';
 import { useForm } from 'react-hook-form';
 import { useCookies } from 'react-cookie';
 import Input from '../components/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { existsToken, login, serverState, token, registerState } from '../features/userSlice';
+import { existsToken, login, serverState, token, registerState, loadingState, setRegister } from '../features/userSlice';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,6 +26,7 @@ const Index = () => {
     const userToken = useSelector(token);
     const [cookies, setCookies] = useCookies(['loremSession']);
     const cookieSession = cookies.loremSession;
+    const loading = useSelector(loadingState);
 
     const onSubmit = (data) => {
         dispatch(login(data));
@@ -57,6 +59,7 @@ const Index = () => {
                         placeholder='Ingrese su email'
                         icon='fas fa-envelope'
                         error={errors.email}
+                        disabled={loading}
                     />
                     <Input
                         label='Password'
@@ -66,6 +69,7 @@ const Index = () => {
                         placeholder='Ingrese su password'
                         icon='fas fa-lock'
                         error={errors.password}
+                        disabled={loading}
                     />
                     {tokenState == false ? (
                         <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p>
@@ -74,13 +78,13 @@ const Index = () => {
                     ) : registerFlag ? (
                         <p className='help is-danger my-5'>El registro se llevó a cabo con éxito</p>
                     ) : null}
-                    <button className='button is-info'>Login</button>
+                    <Button loading={loading} value='Login' />
                 </form>
                 <div>
                     <p>
                         ¿No tenés cuenta? Registrate{' '}
                         <Link href='/register'>
-                            <a>aquí</a>
+                            <a onClick={() => dispatch(setRegister(false))}>aquí</a>
                         </Link>
                     </p>
                 </div>
