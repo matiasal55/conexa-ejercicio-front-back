@@ -5,4 +5,10 @@ const getUserForLogin = async (data) => {
     return request;
 };
 
-module.exports = { getUserForLogin };
+const saveUser = async (data) => {
+    const user = new UserModel(data);
+    const request = await user.save();
+    return request;
+};
+
+module.exports = { getUserForLogin, saveUser };

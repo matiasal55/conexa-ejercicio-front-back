@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
-const { login } = require('../services/users.services');
-const { success, error } = require('../messages/resMessages');
+const { login, register } = require('../services/users.services');
+const { success, error, defineError } = require('../messages/resMessages');
 
 const loginUser = async (req, res) => {
     try {
@@ -19,4 +19,20 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { loginUser };
+const registerUser = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return error(res, errors);
+        }
+        const data = req.body;
+        if (data.password !== data.repassword) return error(res, 'Las contraseñas no coinciden');
+        delete data.repassword;
+        const user = await register(data);
+        return success(res, user, 201);
+    } catch (e) {
+        defineError(res, e.message, 'E11000', 'User data already exists');
+    }
+};
+
+module.exports = { loginUser, registerUser };

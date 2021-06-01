@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
 
-const generalValidator = (name) => check(name).notEmpty().trim().withMessage(`El ${name} no puede estar vacío`);
+const generalValidator = (name, alternativeName = name) => check(name).notEmpty().trim().withMessage(`${alternativeName} no puede estar vacío`);
 
 const loginValidator = [
     generalValidator('email')
@@ -11,4 +11,19 @@ const loginValidator = [
     generalValidator('password').isLength({ min: 4 }).withMessage('La password debe tener mas caracteres').isString(),
 ];
 
-module.exports = { loginValidator };
+const registerValidator = [
+    ...loginValidator,
+    generalValidator('firstName', 'nombre')
+        .isString()
+        .withMessage('El nombre no tiene un formato válido')
+        .isLength({ min: 2, max: 20 })
+        .withMessage('El nombre debe tener más caracteres'),
+    generalValidator('lastName', 'apellido')
+        .isString()
+        .withMessage('El apellido no tiene un formato valido')
+        .isLength({ min: 2, max: 20 })
+        .withMessage('El apellido debe tener más caracteres'),
+    generalValidator('repassword').isLength({ min: 4 }).withMessage('La password debe tener mas caracteres').isString(),
+];
+
+module.exports = { loginValidator, registerValidator };
