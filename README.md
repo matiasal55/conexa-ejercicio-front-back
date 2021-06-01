@@ -1,10 +1,3 @@
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.11.0/devicon.min.css">
- <style>
-    i {
-        font-size:50px;
-    }
- </style>
-
 # Ejercicio de Frontend / Backend
 
 ## Ejercicio técnico realizado para una empresa de tecnología como parte de un proceso de selección de Desarrollador Full Stack Javascript.
@@ -30,10 +23,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
 <b>Frontend:</b>
 
-<i class="devicon-react-original"></i>
-<i class="devicon-redux-original"></i>
-<i class="devicon-nextjs-original"></i>
-
 -   ReactJS (librería base del proyecto)
 -   Bulma (framework CSS)
 -   Redux (manejo de estados globales)
@@ -43,10 +32,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   React Hook Form (formulario de inicio de sesión)
 
 <b>Backend:</b>
-
-<i class="devicon-nodejs-plain"></i>
-<i class="devicon-express-original-wordmark"></i>
-<i class="devicon-mongodb-plain-wordmark"></i>
 
 -   NodeJS (entorno de ejecución principal)
 -   Express (ruteo y manejo de peticiones)
