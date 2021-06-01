@@ -1,6 +1,11 @@
+const { validationResult } = require('express-validator');
 const { login } = require('../services/users.services');
 
 const loginUser = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ message: errors });
+    }
     const data = req.body;
     const user = await login(data);
     if (user) {
