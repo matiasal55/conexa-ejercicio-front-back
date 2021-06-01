@@ -1,12 +1,5 @@
-const db = require('../models/index');
-
 const getUserForLogin = async (data) => {
-    const request = await db.User.findOne({
-        where: {
-            email: data.email,
-            password: data.password,
-        },
-    });
+    const request = data;
     return request;
 };
 

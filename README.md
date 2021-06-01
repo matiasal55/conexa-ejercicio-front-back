@@ -133,4 +133,4 @@ Error 404:
 
 <hr>
 
-Licencia: MIT
+![GitHub](https://img.shields.io/github/license/matiasal55/ejercicio-front-back?style=for-the-badge)
