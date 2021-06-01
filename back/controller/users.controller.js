@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
         user.user.password = null;
         user.user._id = null;
         return res.status(200).json(user);
-    } else res.json(null);
+    } else res.status(400).json({ message: 'User not found' });
 };
 
 module.exports = { loginUser };

@@ -34,13 +34,10 @@ export const { setUserData, setServerState, setExistsToken, endSession } = userS
 export const login = (data) => async (dispatch) => {
     try {
         const request = await postRequest('http://localhost:4000/users/login', data);
-        if (request) {
-            dispatch(setUserData({ userData: request.user, token: request.token }));
-        } else {
-            dispatch(setExistsToken(false));
-        }
+        dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
-        dispatch(setServerState(false));
+        if (e.response && e.response.status == 400) dispatch(setExistsToken(false));
+        else dispatch(setServerState(false));
     }
 };
 
