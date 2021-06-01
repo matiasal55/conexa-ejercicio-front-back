@@ -1,5 +1,5 @@
 const Input = (props) => {
-    const { label, type, placeholder, icon, error, register, name } = props;
+    const { label, type = 'text', placeholder, icon, error, register, name } = props;
     return (
         <div className='field'>
             <label className='label'>{label} </label>
@@ -8,9 +8,7 @@ const Input = (props) => {
                 <span className='icon is-small is-left'>
                     <i className={icon} />
                 </span>
-                <span className='icon is-small is-right'>
-                    <i className='fas fa-exclamation-triangle' />
-                </span>
+                <span className='icon is-small is-right'>{error ? <i className='fas fa-exclamation-triangle' /> : null}</span>
             </div>
             {error ? <p className='help is-danger'>{error.message}</p> : null}
         </div>
