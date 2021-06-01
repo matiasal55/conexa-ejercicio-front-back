@@ -1,16 +1,8 @@
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import Input from '../components/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-const schema = yup.object().shape({
-    firstName: yup.string('Sólo caracteres alfabéticos').required('El campo no puede estar vacío'),
-    lastName: yup.string('Sólo caracteres alfabéticos').required('El campo no puede estar vacío'),
-    email: yup.string().email('El formato de email es inválido').required('Debe ingresar un email válido'),
-    password: yup.string().required('Debe ingresar una contraseña').min(4, 'La contraseña debe poseer más de 4 caracteres').max(20),
-    repassword: yup.string().required('Debe ingresar nuevamente la contraseña').min(4, 'La contraseña debe poseer más de 4 caracteres').max(20),
-});
+import { registerValidate } from '../utils/validations';
 
 const Register = () => {
     const {
@@ -18,7 +10,7 @@ const Register = () => {
         register,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(registerValidate()),
     });
 
     const onSubmit = (data) => {
