@@ -5,6 +5,7 @@ const loginUser = async (req, res) => {
     const user = await login(data);
     if (user) {
         user.user.password = null;
+        user.user._id = null;
         return res.status(200).json(user);
     } else res.json(null);
 };
