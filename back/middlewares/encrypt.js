@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const encryptKey = async (password) => {
-    const salt = await bcrypt.genSalt(10);
+    const numberOfSalt = parseInt(process.env.SALT);
+    const salt = await bcrypt.genSalt(numberOfSalt);
     const newPassword = bcrypt.hash(password, salt);
     return newPassword;
 };
