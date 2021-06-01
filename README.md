@@ -122,7 +122,7 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
     SERVER_PORT= Puerto del servidor de NodeJS
 
-    DB_HOST= URL provista por Atlas o mongodb://localhost:27017/[nombreTabla] o el correspondiente a su base de datos local.
+    DB_URI= URL provista por Atlas o mongodb://localhost:27017/[nombreTabla] o el correspondiente a su base de datos local.
 
     JWT_SECRET= palabra clave secreta para realizar el token.
 
