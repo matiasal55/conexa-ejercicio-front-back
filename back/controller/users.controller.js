@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
         const user = await register(data);
         return success(res, user, 201);
     } catch (e) {
-        defineError(res, e.message, 'E11000', 'User data already exists');
+        defineError(res, e.message, 'E11000', 'User data already exists', 400);
     }
 };
 

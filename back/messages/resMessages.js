@@ -6,8 +6,8 @@ const error = (res, message, status = 400) => {
     res.status(status).json({ message });
 };
 
-const defineError = (res, errorMsg, condition, errorResponse = 'Not Autorized') => {
-    if (errorMsg.includes(condition)) return error(res, errorResponse, 401);
+const defineError = (res, errorMsg, condition, errorResponse = 'Not Autorized', status = 401) => {
+    if (errorMsg.includes(condition)) return error(res, errorResponse, status);
     else return error(res, 'Internal Error', 500);
 };
 
