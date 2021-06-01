@@ -1,6 +1,6 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
-const { success, possibleNotAutorizedAccess } = require('../messages/resMessages');
+const { success, defineError } = require('../messages/resMessages');
 
 const getPhotos = async (req, res) => {
     try {
@@ -13,7 +13,7 @@ const getPhotos = async (req, res) => {
         const photos = request.data;
         success(res, { photos, maxSize });
     } catch (e) {
-        possibleNotAutorizedAccess(res, e.message, 'jwt');
+        defineError(res, e.message, 'jwt');
     }
 };
 

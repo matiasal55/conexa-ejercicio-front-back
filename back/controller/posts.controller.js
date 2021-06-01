@@ -1,6 +1,6 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
-const { success, possibleNotAutorizedAccess, error } = require('../messages/resMessages');
+const { success, defineError, error } = require('../messages/resMessages');
 
 const getPosts = async (req, res) => {
     try {
@@ -10,7 +10,7 @@ const getPosts = async (req, res) => {
         const posts = request.data;
         success(res, posts);
     } catch (e) {
-        possibleNotAutorizedAccess(res, e.message, 'jwt');
+        defineError(res, e.message, 'jwt');
     }
 };
 
