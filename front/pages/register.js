@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { useForm } from 'react-hook-form';
 import Input from '../components/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerValidate } from '../utils/validations';
+import { registerUser, serverState, existsToken, registerState } from '../features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { cookieProvider } from '../utils/cookieProvider';
 
 const Register = () => {
     const {
@@ -12,10 +17,20 @@ const Register = () => {
     } = useForm({
         resolver: yupResolver(registerValidate()),
     });
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const tokenState = useSelector(existsToken);
+    const server = useSelector(serverState);
+    const registerFlag = useSelector(registerState);
+    const cookieSession = cookieProvider('loremSession');
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(registerUser(data));
     };
+
+    if (cookieSession) router.push('/posts');
+
+    if (registerFlag) router.push('/');
 
     return (
         <Layout title='Register'>
@@ -59,6 +74,13 @@ const Register = () => {
                     />
                     <button className='button is-info'>Login</button>
                 </form>
+                <div>
+                    {tokenState == false ? (
+                        <p className='help is-danger my-5'>El correo electrónico ya se encuentra registrado</p>
+                    ) : !server ? (
+                        <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>
+                    ) : null}
+                </div>
             </div>
         </Layout>
     );

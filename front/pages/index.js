@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import Input from '../components/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { existsToken, login, serverState, token } from '../features/userSlice';
+import { existsToken, login, serverState, token, registerState } from '../features/userSlice';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,6 +21,7 @@ const Index = () => {
     const dispatch = useDispatch();
     const tokenState = useSelector(existsToken);
     const server = useSelector(serverState);
+    const registerFlag = useSelector(registerState);
     const userToken = useSelector(token);
     const [cookies, setCookies] = useCookies(['loremSession']);
     const cookieSession = cookies.loremSession;
@@ -70,6 +71,8 @@ const Index = () => {
                         <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p>
                     ) : !server ? (
                         <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>
+                    ) : registerFlag ? (
+                        <p className='help is-danger my-5'>El registro se llevó a cabo con éxito</p>
                     ) : null}
                     <button className='button is-info'>Login</button>
                 </form>
