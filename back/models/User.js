@@ -1,4 +1,5 @@
 const { model, Schema } = require('mongoose');
+const { encryptKey } = require('../middlewares/encrypt');
 
 const userSchema = new Schema({
     firstName: {
@@ -18,6 +19,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+});
+
+userSchema.pre('save', async function () {
+    this.password = await encryptKey(this.password);
 });
 
 const userModel = model('User', userSchema);

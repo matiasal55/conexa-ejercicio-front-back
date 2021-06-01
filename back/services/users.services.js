@@ -1,9 +1,12 @@
 const { getUserForLogin, saveUser } = require('../repositories/users.repository');
 const { generateToken } = require('./jwt');
+const { validateKey } = require('../middlewares/encrypt');
 
 const login = async (data) => {
     const request = await getUserForLogin(data);
     if (request) {
+        const isValidPassword = await validateKey(data.password, request.password);
+        if (!isValidPassword) return null;
         request.password = null;
         request._id = null;
         const user = getToken(request);
