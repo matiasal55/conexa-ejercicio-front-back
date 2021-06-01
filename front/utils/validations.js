@@ -12,13 +12,17 @@ const passwordValidate = (message = 'Debe ingresar una contraseña') => {
     return textValidate(message);
 };
 
+const repasswordValidate = (message = 'Las contraseñas ingresadas no coinciden') => {
+    return passwordValidate('Debe reingresar la contraseña').oneOf([yup.ref('password'), null], message);
+};
+
 export const registerValidate = () =>
     yup.object().shape({
         firstName: textValidate('Debe ingresar su nombre'),
         lastName: textValidate('Debe ingresar su apellido'),
         email: emailValidate(),
         password: passwordValidate(),
-        repassword: passwordValidate('Debe reingresar la contraseña'),
+        repassword: repasswordValidate(),
     });
 
 export const loginValidate = () =>
