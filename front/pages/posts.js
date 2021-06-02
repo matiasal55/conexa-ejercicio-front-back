@@ -6,11 +6,14 @@ import { useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import InternalError from '../components/InternalError';
 import { cookieProvider } from '../utils/cookieProvider';
+import { recoveryData, token, userData } from '../features/userSlice';
 
 const Posts = () => {
     const dispatch = useDispatch();
     const posts = useSelector(postsList);
     const server = useSelector(serverState);
+    const tokenData = useSelector(token);
+    const user = useSelector(userData);
     const router = useRouter();
     const cookieSession = cookieProvider('loremSession');
 
@@ -19,6 +22,7 @@ const Posts = () => {
             return router.push('/');
         }
         dispatch(getPosts(cookieSession));
+        if (!tokenData) dispatch(recoveryData(cookieSession));
     }, []);
 
     const table = () => (

@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
-const { login, register } = require('../services/users.services');
+const { login, register, dataUser } = require('../services/users.services');
 const { success, error, defineError } = require('../messages/resMessages');
+const { validateToken } = require('../services/validateToken');
 
 const loginUser = async (req, res) => {
     try {
@@ -28,9 +29,19 @@ const registerUser = async (req, res) => {
         const user = await register(data);
         return success(res, user, 201);
     } catch (e) {
-        console.log(e.message);
         defineError(res, e.message, 'E11000', 'User data already exists', 400);
     }
 };
 
-module.exports = { loginUser, registerUser };
+const recoveryUser = async (req, res) => {
+    try {
+        const token = req.headers['x-access-token'];
+        const isValid = validateToken(token);
+        const user = await dataUser(isValid.email);
+        return success(res, { user, token });
+    } catch (e) {
+        defineError(res, e.message, 'jwt');
+    }
+};
+
+module.exports = { loginUser, registerUser, recoveryUser };

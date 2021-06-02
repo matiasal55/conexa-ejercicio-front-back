@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { postRequest } from '../utils/requestHandler';
+import { getRequest, postRequest } from '../utils/requestHandler';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -63,6 +63,18 @@ export const registerUser = (data) => async (dispatch) => {
         if (e.response && e.response.status == 400) dispatch(setExistsToken(false));
         else dispatch(setServerState(false));
         dispatch(setLoading());
+    }
+};
+
+export const recoveryData = (token) => async (dispatch) => {
+    try {
+        const headers = {
+            'x-access-token': token,
+        };
+        const request = await getRequest('http://localhost:4000/users/recoveryData', headers);
+        dispatch(setUserData({ userData: request.user, token: request.token }));
+    } catch (e) {
+        dispatch(setServerState(false));
     }
 };
 

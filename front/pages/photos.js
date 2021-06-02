@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 import InternalError from '../components/InternalError';
 import { cookieProvider } from '../utils/cookieProvider';
+import { recoveryData, token } from '../features/userSlice';
 
 const Photos = () => {
     const dispatch = useDispatch();
@@ -15,12 +16,14 @@ const Photos = () => {
     const lengthPhotos = useSelector(lengthList);
     const server = useSelector(serverState);
     const router = useRouter();
+    const tokenData = useSelector(token);
 
     useEffect(() => {
         if (!cookieSession) {
             router.push('/');
         }
         dispatch(getPhotos(1, cookieSession));
+        if (!tokenData) dispatch(recoveryData(cookieSession));
     }, []);
 
     const table = () => (

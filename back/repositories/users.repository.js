@@ -1,7 +1,7 @@
 const UserModel = require('../models/User');
 
-const getUserForLogin = async (data) => {
-    const request = UserModel.findOne({ email: data.email });
+const getUserForLogin = async (email) => {
+    const request = UserModel.findOne({ email });
     return request;
 };
 

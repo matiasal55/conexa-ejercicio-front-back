@@ -3,7 +3,7 @@ const { generateToken } = require('./jwt');
 const { validateKey } = require('../middlewares/encrypt');
 
 const login = async (data) => {
-    const request = await getUserForLogin(data);
+    const request = await getUserForLogin(data.email);
     if (request) {
         const isValidPassword = await validateKey(data.password, request.password);
         if (!isValidPassword) return null;
@@ -26,6 +26,16 @@ const register = async (data) => {
     return request;
 };
 
+const dataUser = async (email) => {
+    const request = await getUserForLogin(email);
+    if (request) {
+        request.password = null;
+        request._id = null;
+        return request;
+    }
+    return request;
+};
+
 const getToken = (data) => {
     const token = generateToken(data.email);
     const user = {
@@ -35,4 +45,4 @@ const getToken = (data) => {
     return user;
 };
 
-module.exports = { login, register };
+module.exports = { login, register, dataUser };
