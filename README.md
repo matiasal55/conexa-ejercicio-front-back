@@ -15,7 +15,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 <b>Agregado personal:</b>
 
 -   Agregar un proceso en el cual el usuario pueda registrarse en el sistema.
--   Realizar tests con Jest (En Proceso).
 
 <hr>
 
@@ -42,7 +41,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
     <img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
     <img alt="Redux" src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"/>
     <img alt="Next JS" src="https://img.shields.io/badge/nextjs-%23000000.svg?style=for-the-badge&logo=next.js&logoColor=white"/>
-    <img alt="Jest" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white"/>
 </div>
 
 -   ReactJS (librería base del proyecto)
@@ -53,7 +51,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   Axios (peticiones externas)
 -   React Hook Form (formulario de inicio de sesión)
 -   Yup (validación de datos ingresados en frontend)
--   Jest (pruebas unitarias)
 
 <b>Backend:</b>
 
@@ -61,7 +58,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
     <img alt="NodeJS" src="https://img.shields.io/badge/node.js-%2343853D.svg?style=for-the-badge&logo=node-dot-js&logoColor=white"/>
     <img alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
     <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"/>
-    <img alt="Jest" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white"/>
 </div>
 
 -   NodeJS (entorno de ejecución principal)
@@ -75,7 +71,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   Mongoose (ORM para usar MongoDB, ver más adelante)
 -   Bcrypt (encriptado de contraseña)
 -   Express Validator (validación de datos ingresados en backend)
--   Jest (pruebas unitarias)
 
 <hr>
 
