@@ -15,7 +15,22 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 <b>Agregado personal:</b>
 
 -   Agregar un proceso en el cual el usuario pueda registrarse en el sistema.
--   Realizar tests con Jest.
+-   Realizar tests con Jest (En Proceso).
+
+<hr>
+
+### Características
+
+-   Se utiliza el patrón de diseño Modelo - Controlador (la Vista está por separado hecha en React) junto al uso de Servicios y Repositorios.
+-   Motor de base de datos no relacionales: MongoDB.
+-   Cuenta con validaciones de datos ingresados tanto en frontend como en backend.
+-   Encriptación de contraseña al crear un usuario y verificación de la contraseña ingresada con la real.
+-   Generación de token con una palabra secreta a elección.
+-   Verificación de token enviado por Header.
+-   Sesión mantenida durante una hora. Al reingresar a algún sitio se verifica si hay alguna cookie que pertenezca al sitio y además recupera los datos del usuario.
+-   La contraseña y el ID se mantienen en el servidor.
+-   En caso de ir a una página incorrecta se muestra un mensaje 404 personalizado (ver Screenshots al final) y cuando falla el servidor se muestra un mensaje 500 también personalizado.
+-   Siempre se verifica la existencia de cookie con el token y se actuará al respecto. Si existe se podrá ver Posts y Photos pero no Index ni Registrar, y si no existe no se podrá acceder a Posts y Photos debiendose registrar o iniciar sesión.
 
 <hr>
 
@@ -37,6 +52,7 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   React Cookie (manejo de cookies)
 -   Axios (peticiones externas)
 -   React Hook Form (formulario de inicio de sesión)
+-   Yup (validación de datos ingresados en frontend)
 -   Jest (pruebas unitarias)
 
 <b>Backend:</b>
@@ -57,6 +73,8 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   Dotenv (uso de variables de entorno)
 -   JSON Web Tokens (creación y administración de tokens)
 -   Mongoose (ORM para usar MongoDB, ver más adelante)
+-   Bcrypt (encriptado de contraseña)
+-   Express Validator (validación de datos ingresados en backend)
 -   Jest (pruebas unitarias)
 
 <hr>
@@ -68,7 +86,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
     -   Encriptación de contraseña. Al no haber un punto específico respecto al registro de datos se optó por no recurrir a la encriptación. Con el agregado de la funcionalidad de registro se utiliza Bcrypt.
     -   Validación de datos del lado del servidor. No lo consideré necesario por los fines del ejercicio y por los tiempos brindados. Fue agregado.
     -   Personalmente considero que realicé el ejercicio según los requerimientos, con diversos agregados que no excedieran lo que debía hacer. Estuve de acuerdo con algunas correcciones salvo en el caso de uso de una base de datos no especificada, la encriptación de datos cuando no se solicita un proceso de registros, el "no uso" de componentes en frontend cuando claramente se usaron siempre que fue necesario (por lo menos desde el punto de vista de un Junior) y el diseño sencillo del sitio (no se solicitó ninguna pauta en cuanto al diseño ni siquiera en la solicitud de empleo, sobre todo cuando buscaban un Desarrollador Full Stack Javascript). La transcripción del ejercicio es tal cual lo solicitado (salvo el "agregado personal", el cual se aclara), así que se puede apreciar qué se pide realmente.
--   En caso de ir a una página incorrecta se muestra un mensaje 404 personalizado (ver Screenshots) y cuando falla el servidor se muestra un mensaje 500 también personalizado.
 
 <hr>
 
