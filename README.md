@@ -76,6 +76,7 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
 ### Consideraciones:
 
+-   Inicialmente se desarrolló con Next porque me resolvía cosas de ruteo y la forma de entregar el sitio. Tuve problemas al querer hacer cambios o diversas acciones y decidí no usar Next sino volver a usar React puro junto con React Router para routing. La versión de Next se encuentra en la carpeta 'old_front'.
 -   En el feedback hecho por la empresa se corrigieron varios puntos:
     -   Se utilizó MySQL y se debería haber usado MongoDB. Este punto no fue aclarado en el ejercicio original y opté por usar MySQL ya que considero que se acostumbra a guardar información vinculada a usuarios en bases de datos relacionales ya que después se relacionará con otras actividades que realizará el mismo. Por eso en principio se utilizó Sequelize y en el cambio de motor de base de datos a MongoDB se usa Mongoose.
     -   Encriptación de contraseña. Al no haber un punto específico respecto al registro de datos se optó por no recurrir a la encriptación. Con el agregado de la funcionalidad de registro se utiliza Bcrypt.
