@@ -104,6 +104,8 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
     <code>npm run build</code>
 
+4. Crear un usuario para poder ingresar al sitio. Una vez creado se debe loguear.
+
 #### Backend:
 
 1. Mover a carpeta Backend:
