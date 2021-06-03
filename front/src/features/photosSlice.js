@@ -27,7 +27,7 @@ export const getPhotos = (page, token) => async (dispatch) => {
         const headers = {
             'x-access-token': token,
         };
-        const request = await getRequest('http://localhost:4000/photos/' + page, headers);
+        const request = await getRequest('/photos/' + page, headers);
         dispatch(setPhotosList({ photos: request.photos, length: request.maxSize }));
     } catch (e) {
         setTimeout(() => {

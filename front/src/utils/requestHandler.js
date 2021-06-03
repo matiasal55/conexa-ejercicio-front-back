@@ -1,11 +1,23 @@
 import axios from 'axios';
+import { server, users } from '../config/config';
 
-export const getRequest = async (route, headers = {}) => {
-    const request = await axios.get(route, { headers });
+export const getRequest = async (route, headers = {}, userRoute = false) => {
+    let url;
+    if (userRoute) {
+        url = server + users + route;
+    } else url = server + route;
+    console.log(url);
+    const request = await axios.get(url, { headers });
     return request.data;
 };
 
-export const postRequest = async (route, data) => {
-    const request = await axios.post(route, data);
+export const postRequest = async (route, data, userRoute = false) => {
+    let url;
+    if (userRoute) {
+        url = server + users + route;
+    } else url = server + route;
+    console.log(url);
+
+    const request = await axios.post(url, data);
     return request.data;
 };

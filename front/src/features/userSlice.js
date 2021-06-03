@@ -43,7 +43,7 @@ export const { setUserData, setServerState, setExistsToken, endSession, setRegis
 export const login = (data) => async (dispatch) => {
     try {
         dispatch(setLoading());
-        const request = await postRequest('http://localhost:4000/users/login', data);
+        const request = await postRequest('/login', data, true);
         dispatch(setLoading());
         dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
@@ -56,7 +56,7 @@ export const login = (data) => async (dispatch) => {
 export const registerUser = (data) => async (dispatch) => {
     try {
         dispatch(setLoading());
-        const request = await postRequest('http://localhost:4000/users/register', data);
+        const request = await postRequest('/register', data, true);
         dispatch(setLoading());
         dispatch(setRegister(true));
     } catch (e) {
@@ -71,7 +71,7 @@ export const recoveryData = (token) => async (dispatch) => {
         const headers = {
             'x-access-token': token,
         };
-        const request = await getRequest('http://localhost:4000/users/recoveryData', headers);
+        const request = await getRequest('/recoveryData', headers, true);
         dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
         dispatch(setServerState(false));

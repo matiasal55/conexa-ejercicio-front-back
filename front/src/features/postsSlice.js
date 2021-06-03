@@ -25,7 +25,7 @@ export const getPosts = (token) => async (dispatch) => {
         const headers = {
             'x-access-token': token,
         };
-        const request = await getRequest('http://localhost:4000/posts', headers);
+        const request = await getRequest('/posts', headers);
         dispatch(setPostsList(request));
     } catch (e) {
         setTimeout(() => {
