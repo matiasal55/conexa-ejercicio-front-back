@@ -2,6 +2,8 @@
 
 ## Ejercicio técnico realizado para una empresa de tecnología como parte de un proceso de selección de Desarrollador Full Stack Javascript.
 
+### Deploy: https://ejercicio-mern-front-back.vercel.app/
+
 ### Descripción:
 
 Crear 2 proyectos 1 llamado “Front” y otro llamado “Back”. El proyecto de Front será creado con React, mientras que en el Proyecto de Back deberá ser creado con Express de Node, el cual brindara una API REST JSON.
