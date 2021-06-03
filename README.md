@@ -46,7 +46,7 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 -   ReactJS (librería base del proyecto)
 -   Bulma (framework CSS)
 -   Redux (manejo de estados globales)
--   Next (server-side rendering y routing)
+-   React Router (routing)
 -   React Cookie (manejo de cookies)
 -   Axios (peticiones externas)
 -   React Hook Form (formulario de inicio de sesión)
@@ -104,14 +104,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
     <code>npm run build</code>
 
-4. Datos de inicio de sesión:
-
-    <b>Email:</b> usuario@correo.com
-
-    <b>Password:</b> 12345
-
-    <small>NOTA: Intente realizar el login con datos incorrectos. Se visualizará un mensaje que diga que las credenciales son incorrectas.</small>
-
 #### Backend:
 
 1. Mover a carpeta Backend:
@@ -122,11 +114,11 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
     <code>npm install</code>
 
-3. Ejecución con Nodemon:
+3. Modo desarrollador:
 
     <code>npm run dev</code>
 
-    Ejecución con Node:
+    Modo producción:
 
     <code>npm start</code>
 
