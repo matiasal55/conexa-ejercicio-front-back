@@ -1,7 +1,11 @@
 import * as yup from 'yup';
 
 const textValidate = (message) => {
-    return yup.string('Solo caracteres alfabeticos').required(message).trim();
+    return yup
+        .string()
+        .matches(/^[A-Za-z]+$/, 'Solo caracteres alfabeticos')
+        .required(message)
+        .trim();
 };
 
 const emailValidate = (message = 'Debe ingresar un email válido') => {

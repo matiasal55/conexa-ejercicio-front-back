@@ -15,11 +15,13 @@ const registerValidator = [
     ...loginValidator,
     generalValidator('firstName', 'nombre')
         .isString()
+        .isAlpha()
         .withMessage('El nombre no tiene un formato válido')
         .isLength({ min: 2, max: 20 })
         .withMessage('El nombre debe tener más caracteres'),
     generalValidator('lastName', 'apellido')
         .isString()
+        .isAlpha()
         .withMessage('El apellido no tiene un formato valido')
         .isLength({ min: 2, max: 20 })
         .withMessage('El apellido debe tener más caracteres'),
