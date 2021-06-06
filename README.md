@@ -132,7 +132,7 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
 4. Crear .env de acuerdo a las variables de ejemplo en .env.example
 
-    SERVER_PORT= Puerto del servidor de NodeJS
+    PORT= Puerto del servidor de NodeJS
 
     DB_URI= URL provista por Atlas o mongodb://localhost:27017/[nombreTabla] o el correspondiente a su base de datos local.
 
