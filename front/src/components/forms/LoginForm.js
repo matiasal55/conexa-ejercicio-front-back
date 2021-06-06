@@ -56,7 +56,7 @@ const LoginForm = () => {
             <div>
                 <p>
                     ¿No tenés cuenta? Registrate{' '}
-                    <Link to='/register' onClick={() => dispatch(setRegister(false))}>
+                    <Link to='/register' onClick={() => dispatch(setRegister(null))}>
                         aquí
                     </Link>
                 </p>

@@ -74,7 +74,7 @@ const RegisterForm = () => {
                     error={errors.repassword}
                     disabled={loading}
                 />
-                {!registerState ? (
+                {registerState === false ? (
                     <p className='help is-danger my-5'>El correo electrónico ya se encuentra registrado</p>
                 ) : !serverState ? (
                     <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>

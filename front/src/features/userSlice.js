@@ -7,7 +7,7 @@ export const userSlice = createSlice({
         token: null,
         userData: {},
         serverState: true,
-        registerState: false,
+        registerState: null,
         loading: false,
     },
     reducers: {
