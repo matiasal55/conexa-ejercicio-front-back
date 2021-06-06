@@ -1,20 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { photosList, getPhotos, lengthList, serverState } from '../features/photosSlice';
+import { getPhotos, photosSelector } from '../features/photosSlice';
 import { useEffect } from 'react';
 import Pagination from '../components/Pagination';
-import Spinner from '../components/Spinner';
-import InternalError from '../components/InternalError';
 import { recoveryData, token } from '../features/userSlice';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router';
+import Table from '../components/Table';
+import AdminContent from '../components/AdminContent';
 
 const Photos = () => {
     const dispatch = useDispatch();
+    const selector = useSelector(photosSelector);
+    const { photosList, serverState, lengthList } = selector;
     const [cookies, setCookies] = useCookies(['loremSession']);
     const cookieSession = cookies.loremSession;
-    const photos = useSelector(photosList);
-    const lengthPhotos = useSelector(lengthList);
-    const server = useSelector(serverState);
     const tokenData = useSelector(token);
     const history = useHistory();
 
@@ -26,45 +25,21 @@ const Photos = () => {
         if (!tokenData) dispatch(recoveryData(cookieSession));
     }, []);
 
-    const table = () => (
-        <div>
-            <table className='table mt-5 is-hoverable is-fullwidth'>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {photos.map((photo) => (
-                        <tr key={photo.id}>
-                            <td className='is-vcentered'>{photo.id}</td>
-                            <td className='is-vcentered'>{photo.title}</td>
-                            <td className='is-vcentered'>
-                                <img src={photo.thumbnailUrl} alt={photo.title} />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Pagination length={lengthPhotos} goToPage={(page) => dispatch(getPhotos(page, cookieSession))} />
-        </div>
-    );
-
     return (
-        <div>
-            {photos.length > 0 ? (
-                <>
-                    <h1 className='is-size-1'>Photos</h1>
-                    {table()}
-                </>
-            ) : server ? (
-                <Spinner />
-            ) : (
-                <InternalError />
-            )}
-        </div>
+        <AdminContent condition={photosList.length > 0} title='Photos' serverState={serverState}>
+            <Table theads={['Id', 'Title', 'Image']}>
+                {photosList.map((photo) => (
+                    <tr key={photo.id}>
+                        <td className='is-vcentered'>{photo.id}</td>
+                        <td className='is-vcentered'>{photo.title}</td>
+                        <td className='is-vcentered'>
+                            <img src={photo.thumbnailUrl} alt={photo.title} />
+                        </td>
+                    </tr>
+                ))}
+            </Table>
+            <Pagination length={lengthList} goToPage={(page) => dispatch(getPhotos(page, cookieSession))} />
+        </AdminContent>
     );
 };
 
