@@ -1,23 +1,37 @@
 import axios from 'axios';
 import { server, users } from '../config/config';
 
-export const getRequest = async (route, headers = {}, userRoute = false) => {
+const getUrl = (route, userRoute = false) => {
     let url;
     if (userRoute) {
         url = server + users + route;
     } else url = server + route;
-    console.log(url);
-    const request = await axios.get(url, { headers });
+    return url;
+};
+
+const getHeader = (token) => {
+    let headers = {};
+    if (token) {
+        headers['x-access-token'] = token;
+    }
+    return headers;
+};
+
+const makeRequest = async (action, url, ...params) => {
+    const request = await axios[action](url, ...params);
     return request.data;
 };
 
-export const postRequest = async (route, data, userRoute = false) => {
-    let url;
-    if (userRoute) {
-        url = server + users + route;
-    } else url = server + route;
-    console.log(url);
+export const getRequest = async (route, token = null, userRoute = false) => {
+    const url = getUrl(route, userRoute);
+    const headers = getHeader(token);
+    const request = await makeRequest('get', url, { headers });
+    return request;
+};
 
-    const request = await axios.post(url, data);
-    return request.data;
+export const postRequest = async (route, data, userRoute = false, token = null) => {
+    const url = getUrl(route, userRoute);
+    const headers = getHeader(token);
+    const request = await makeRequest('post', url, data, { headers });
+    return request;
 };
