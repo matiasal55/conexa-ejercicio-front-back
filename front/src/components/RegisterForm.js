@@ -2,8 +2,9 @@ import { useForm } from 'react-hook-form';
 import Input from './Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerValidate } from '../utils/validations';
-import { registerUser, userSelector } from '../features/userSlice';
+import { registerUser, userSelector, setRegister } from '../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 
 const RegisterForm = () => {
@@ -73,14 +74,20 @@ const RegisterForm = () => {
                     error={errors.repassword}
                     disabled={loading}
                 />
-                <Button value='Registrar' loading={loading} />
-            </form>
-            <div>
                 {existsToken === false ? (
                     <p className='help is-danger my-5'>El correo electrónico ya se encuentra registrado</p>
                 ) : !serverState ? (
                     <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>
                 ) : null}
+                <Button value='Registrar' loading={loading} />
+            </form>
+            <div>
+                <p>
+                    ¿Ya tenés cuenta? Ingresa{' '}
+                    <Link to='/' onClick={() => dispatch(setRegister(false))}>
+                        aquí
+                    </Link>
+                </p>
             </div>
         </>
     );
