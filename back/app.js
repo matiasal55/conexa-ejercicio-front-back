@@ -1,6 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
-const { error } = require('./messages/resMessages');
+const { error } = require('./messages/general.messages');
 const postsRouter = require('./routes/posts.routes');
 const photosRouter = require('./routes/photos.routes');
 const usersRouter = require('./routes/users.routes');

@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const { login, register, dataUser } = require('../services/users.services');
 const { success, error } = require('../messages/general.messages');
-const { possibleUnathorizedAccess, possibleDataEntryError } = require('../messages/resMessages');
+const { possibleUnathorizedAccess, possibleDataEntryError } = require('../messages/possibleErrors');
 const { possibleUserExists } = require('../messages/users.messages');
 const { validateToken } = require('../services/validateToken');
 

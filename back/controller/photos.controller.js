@@ -1,7 +1,7 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
 const { success } = require('../messages/general.messages');
-const { possibleUnathorizedAccess } = require('../messages/resMessages');
+const { possibleUnathorizedAccess } = require('../messages/possibleErrors');
 
 const getPhotos = async (req, res) => {
     try {
