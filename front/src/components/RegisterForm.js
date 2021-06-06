@@ -17,7 +17,7 @@ const RegisterForm = () => {
     });
     const dispatch = useDispatch();
     const selector = useSelector(userSelector);
-    const { existsToken, serverState, loading } = selector;
+    const { registerState, serverState, loading } = selector;
 
     const onSubmit = (data) => {
         dispatch(registerUser(data));
@@ -74,7 +74,7 @@ const RegisterForm = () => {
                     error={errors.repassword}
                     disabled={loading}
                 />
-                {existsToken === false ? (
+                {!registerState ? (
                     <p className='help is-danger my-5'>El correo electrónico ya se encuentra registrado</p>
                 ) : !serverState ? (
                     <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>

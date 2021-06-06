@@ -7,12 +7,12 @@ import LoginForm from '../components/LoginForm';
 
 const Index = () => {
     const selector = useSelector(userSelector);
-    const { existsToken, token } = selector;
+    const { token } = selector;
     const [cookies, setCookies] = useCookies(['loremSession']);
     const cookieSession = cookies.loremSession;
     const history = useHistory();
 
-    if (existsToken) {
+    if (token) {
         setCookies('loremSession', token, {
             maxAge: 60 * 60,
         });

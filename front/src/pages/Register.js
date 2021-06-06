@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { setExistsToken, userSelector } from '../features/userSlice';
+import { setToken, userSelector } from '../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { Redirect, useHistory } from 'react-router';
@@ -16,7 +16,7 @@ const Register = () => {
     if (cookieSession) history.push('/posts');
 
     useEffect(() => {
-        dispatch(setExistsToken(null));
+        dispatch(setToken(null));
     }, []);
 
     if (registerState) return <Redirect to='/' />;

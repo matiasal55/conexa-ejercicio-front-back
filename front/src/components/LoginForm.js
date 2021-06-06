@@ -15,7 +15,7 @@ const LoginForm = () => {
     } = useForm({ resolver: yupResolver(loginValidate()) });
     const dispatch = useDispatch();
     const selector = useSelector(userSelector);
-    const { existsToken, serverState, registerState, loading } = selector;
+    const { serverState, registerState, loading, token } = selector;
 
     const onSubmit = (data) => {
         dispatch(login(data));
@@ -44,7 +44,7 @@ const LoginForm = () => {
                     error={errors.password}
                     disabled={loading}
                 />
-                {existsToken === false ? (
+                {token === false ? (
                     <p className='help is-danger my-5'>El usuario y/o contraseña es incorrecta</p>
                 ) : !serverState ? (
                     <p className='help is-danger my-5'>Hubo un problema interno. Intente más tarde</p>

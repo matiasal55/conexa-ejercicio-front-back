@@ -6,7 +6,6 @@ export const userSlice = createSlice({
     initialState: {
         token: null,
         userData: {},
-        existsToken: null,
         serverState: true,
         registerState: false,
         loading: false,
@@ -15,16 +14,14 @@ export const userSlice = createSlice({
         setUserData: (state, action) => {
             state.userData = action.payload.userData;
             state.token = action.payload.token;
-            state.existsToken = true;
             state.serverState = true;
             state.registerState = false;
         },
-        setExistsToken: (state, action) => {
-            state.existsToken = action.payload;
+        setToken: (state, action) => {
+            state.token = action.payload;
         },
         endSession: (state) => {
             state.token = null;
-            state.existsToken = null;
         },
         setServerState: (state, action) => {
             state.serverState = action.payload;
@@ -38,7 +35,7 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setUserData, setServerState, setExistsToken, endSession, setRegister, setLoading } = userSlice.actions;
+export const { setUserData, setServerState, setToken, endSession, setRegister, setLoading } = userSlice.actions;
 
 export const login = (data) => async (dispatch) => {
     try {
@@ -47,7 +44,7 @@ export const login = (data) => async (dispatch) => {
         dispatch(setLoading());
         dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
-        if (e.response && e.response.status === 400) dispatch(setExistsToken(false));
+        if (e.response && e.response.status === 400) dispatch(setToken(false));
         else dispatch(setServerState(false));
         dispatch(setLoading());
     }
@@ -60,7 +57,7 @@ export const registerUser = (data) => async (dispatch) => {
         dispatch(setLoading());
         dispatch(setRegister(true));
     } catch (e) {
-        if (e.response && e.response.status === 400) dispatch(setExistsToken(false));
+        if (e.response && e.response.status === 400) dispatch(setRegister(false));
         else dispatch(setServerState(false));
         dispatch(setLoading());
     }
