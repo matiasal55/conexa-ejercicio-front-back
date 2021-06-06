@@ -1,6 +1,7 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
-const { success, defineError, error } = require('../messages/resMessages');
+const { success } = require('../messages/general.messages');
+const { possibleUnathorizedAccess } = require('../messages/resMessages');
 
 const getPosts = async (req, res) => {
     try {
@@ -8,9 +9,9 @@ const getPosts = async (req, res) => {
         const isValid = validateToken(token);
         const request = await getRequest('https://jsonplaceholder.typicode.com/posts');
         const posts = request.data;
-        success(res, posts);
+        return success(res, posts);
     } catch (e) {
-        defineError(res, e.message, 'jwt');
+        return possibleUnathorizedAccess(res, e.message);
     }
 };
 

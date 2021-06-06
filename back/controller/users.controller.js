@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
 const { login, register, dataUser } = require('../services/users.services');
-const { success, error, defineError } = require('../messages/resMessages');
+const { success, error } = require('../messages/general.messages');
+const { possibleUnathorizedAccess, possibleDataEntryError } = require('../messages/resMessages');
+const { possibleUserExists } = require('../messages/users.messages');
 const { validateToken } = require('../services/validateToken');
 
 const verifyValidation = (req) => {
@@ -18,7 +20,7 @@ const loginUser = async (req, res) => {
         if (!user) return error(res, 'Incorrect user or password');
         return success(res, user);
     } catch (e) {
-        return defineError(res, e.message, 'campos', 'Campos ingresados incorrectos', 400);
+        return possibleDataEntryError(res, e.message);
     }
 };
 
@@ -31,9 +33,9 @@ const registerUser = async (req, res) => {
         return success(res, user, 201);
     } catch (e) {
         if (e.message && e.message.includes('campos')) {
-            return error(res, 'Campos ingresados incorrectos');
+            return possibleDataEntryError(res, e.message);
         }
-        return defineError(res, e.message, 'E11000', 'User data already exists', 400);
+        return possibleUserExists(res, e.message);
     }
 };
 
@@ -44,7 +46,7 @@ const recoveryUser = async (req, res) => {
         const user = await dataUser(isValid.email);
         return success(res, { user, token });
     } catch (e) {
-        defineError(res, e.message, 'jwt');
+        return possibleUnathorizedAccess(res, e.message);
     }
 };
 

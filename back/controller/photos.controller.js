@@ -1,6 +1,7 @@
 const { getRequest } = require('../services/requestHandler');
 const { validateToken } = require('../services/validateToken');
-const { success, defineError } = require('../messages/resMessages');
+const { success } = require('../messages/general.messages');
+const { possibleUnathorizedAccess } = require('../messages/resMessages');
 
 const getPhotos = async (req, res) => {
     try {
@@ -11,9 +12,9 @@ const getPhotos = async (req, res) => {
         const request = await getRequest(`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=${limit}`);
         const maxSize = request.headers['x-total-count'];
         const photos = request.data;
-        success(res, { photos, maxSize });
+        return success(res, { photos, maxSize });
     } catch (e) {
-        defineError(res, e.message, 'jwt');
+        return possibleUnathorizedAccess(res, e.message);
     }
 };
 

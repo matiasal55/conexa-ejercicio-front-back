@@ -1,14 +1,22 @@
-const success = (res, content, status = 200) => {
-    res.status(status).json(content);
+const { verifyError } = require('./external.messages');
+
+const possibleUnathorizedAccess = (res, message) => {
+    const status = 401;
+    const condition = 'jwt';
+    const responseMsg = 'Not Authorized';
+    return verifyError(res, message, condition, responseMsg, status);
 };
 
-const error = (res, message, status = 400) => {
-    res.status(status).json({ message });
+const possibleDataEntryError = (res, message) => {
+    const condition = 'campos';
+    const responseMsg = 'Campos ingresados incorrectos';
+    return verifyError(res, message, condition, responseMsg);
 };
 
-const defineError = (res, errorMsg, condition, errorResponse = 'Not Autorized', status = 401) => {
-    if (errorMsg.includes(condition)) return error(res, errorResponse, status);
-    else return error(res, 'Internal Error', 500);
+const possibleUserExists = (res, message) => {
+    const condition = 'E11000';
+    const responseMsg = 'User data already exists';
+    return verifyError(res, message, condition, responseMsg);
 };
 
-module.exports = { success, error, defineError };
+module.exports = { possibleUnathorizedAccess, possibleDataEntryError, possibleUserExists };
