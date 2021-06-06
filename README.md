@@ -122,9 +122,13 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
     <code>npm run dev</code>
 
+    <small>Nota: En caso de problemas de ejecución, intente con <code>npm run dev:alt</code></small>
+
     Modo producción:
 
     <code>npm start</code>
+
+    <small>Nota: En caso de problemas de ejecución, intente con <code>npm run start:alt</code></small>
 
 4. Crear .env de acuerdo a las variables de ejemplo en .env.example
 
@@ -133,6 +137,8 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
     DB_URI= URL provista por Atlas o mongodb://localhost:27017/[nombreTabla] o el correspondiente a su base de datos local.
 
     JWT_SECRET= palabra clave secreta para realizar el token.
+
+    SALT= Cantidad de salt para encriptar la contraseña.
 
 <hr>
 
