@@ -1,5 +1,4 @@
 const express = require('express');
-const logger = require('morgan');
 const { error } = require('./messages/general.messages');
 const postsRouter = require('./routes/posts.routes');
 const photosRouter = require('./routes/photos.routes');
@@ -8,7 +7,6 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
