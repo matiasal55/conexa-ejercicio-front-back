@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development nodemon",
     "dev:alt": "cross-env NODE_ENV=development nodemon",
-    "start": "NODE_ENV=production node index",
+    "start": "node index",
     "start:alt": "cross-env NODE_ENV=production node index"
   },
   "keywords": [
