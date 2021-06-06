@@ -22,10 +22,7 @@ export const { setPostsList, setServerState } = postsSlice.actions;
 
 export const getPosts = (token) => async (dispatch) => {
     try {
-        const headers = {
-            'x-access-token': token,
-        };
-        const request = await getRequest('/posts', headers);
+        const request = await getRequest('/posts', token);
         dispatch(setPostsList(request));
     } catch (e) {
         setTimeout(() => {
@@ -34,8 +31,6 @@ export const getPosts = (token) => async (dispatch) => {
     }
 };
 
-export const postsList = (state) => state.posts.postsList;
-export const lengthList = (state) => state.posts.lengthList;
-export const serverState = (state) => state.posts.serverState;
+export const postsSelector = (state) => state.posts;
 
 export default postsSlice.reducer;

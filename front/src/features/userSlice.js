@@ -8,7 +8,7 @@ export const userSlice = createSlice({
         userData: {},
         existsToken: null,
         serverState: true,
-        register: false,
+        registerState: false,
         loading: false,
     },
     reducers: {
@@ -17,7 +17,7 @@ export const userSlice = createSlice({
             state.token = action.payload.token;
             state.existsToken = true;
             state.serverState = true;
-            state.register = false;
+            state.registerState = false;
         },
         setExistsToken: (state, action) => {
             state.existsToken = action.payload;
@@ -30,7 +30,7 @@ export const userSlice = createSlice({
             state.serverState = action.payload;
         },
         setRegister: (state, action) => {
-            state.register = action.payload;
+            state.registerState = action.payload;
         },
         setLoading: (state) => {
             state.loading = !state.loading;
@@ -68,10 +68,7 @@ export const registerUser = (data) => async (dispatch) => {
 
 export const recoveryData = (token) => async (dispatch) => {
     try {
-        const headers = {
-            'x-access-token': token,
-        };
-        const request = await getRequest('/recoveryData', headers, true);
+        const request = await getRequest('/recoveryData', token, true);
         dispatch(setUserData({ userData: request.user, token: request.token }));
     } catch (e) {
         dispatch(setServerState(false));
@@ -82,11 +79,7 @@ export const logout = () => (dispatch) => {
     dispatch(endSession());
 };
 
-export const existsToken = (state) => state.user.existsToken;
 export const token = (state) => state.user.token;
-export const userData = (state) => state.user.userData;
-export const serverState = (state) => state.user.serverState;
-export const registerState = (state) => state.user.register;
-export const loadingState = (state) => state.user.loading;
+export const userSelector = (state) => state.user;
 
 export default userSlice.reducer;

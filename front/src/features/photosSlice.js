@@ -24,10 +24,7 @@ export const { setPhotosList, setServerState } = photosSlice.actions;
 
 export const getPhotos = (page, token) => async (dispatch) => {
     try {
-        const headers = {
-            'x-access-token': token,
-        };
-        const request = await getRequest('/photos/' + page, headers);
+        const request = await getRequest('/photos/' + page, token);
         dispatch(setPhotosList({ photos: request.photos, length: request.maxSize }));
     } catch (e) {
         setTimeout(() => {
@@ -36,8 +33,6 @@ export const getPhotos = (page, token) => async (dispatch) => {
     }
 };
 
-export const photosList = (state) => state.photos.photosList;
-export const lengthList = (state) => state.photos.lengthList;
-export const serverState = (state) => state.photos.serverState;
+export const photosSelector = (state) => state.photos;
 
 export default photosSlice.reducer;
