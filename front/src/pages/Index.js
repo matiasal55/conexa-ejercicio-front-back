@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { userSelector } from '../features/userSlice';
 import { useHistory } from 'react-router-dom';
 import logo from '../images/cloud-service.png';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/forms/LoginForm';
 
 const Index = () => {
     const selector = useSelector(userSelector);

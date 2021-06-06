@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { recoveryData, token } from '../features/userSlice';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router';
-import Table from '../components/Table';
+import Table from '../components/tables/Table';
 import AdminContent from '../components/AdminContent';
 
 const Posts = () => {

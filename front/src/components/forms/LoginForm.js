@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import Input from './Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
-import { loginValidate } from '../utils/validations';
+import { loginValidate } from '../../utils/validations';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, setRegister, userSelector } from '../features/userSlice';
+import { login, setRegister, userSelector } from '../../features/userSlice';
 
 const LoginForm = () => {
     const {

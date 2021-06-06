@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getPhotos, photosSelector } from '../features/photosSlice';
 import { useEffect } from 'react';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/tables/Pagination';
 import { recoveryData, token } from '../features/userSlice';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router';
-import Table from '../components/Table';
+import Table from '../components/tables/Table';
 import AdminContent from '../components/AdminContent';
 
 const Photos = () => {

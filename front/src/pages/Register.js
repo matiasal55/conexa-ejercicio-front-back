@@ -3,7 +3,7 @@ import { setToken, userSelector } from '../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { Redirect, useHistory } from 'react-router';
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from '../components/forms/RegisterForm';
 
 const Register = () => {
     const dispatch = useDispatch();

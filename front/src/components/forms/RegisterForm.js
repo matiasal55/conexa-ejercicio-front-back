@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import Input from './Input';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerValidate } from '../utils/validations';
-import { registerUser, userSelector, setRegister } from '../features/userSlice';
+import { registerValidate } from '../../utils/validations';
+import { registerUser, userSelector, setRegister } from '../../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from './Button';
