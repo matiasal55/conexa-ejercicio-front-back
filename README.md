@@ -63,7 +63,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
 
 -   NodeJS (entorno de ejecución principal)
 -   Express (ruteo y manejo de peticiones)
--   Morgan (visualización de llegada de peticiones al servidor)
 -   Nodemon (monitoreo de cambios en el código)
 -   Axios (peticiones externas)
 -   CORS (habilitación de peticiones hechas desde un sitio externo)
@@ -82,7 +81,6 @@ Todos los llamados a api deben ser a través del back, no directamente desde las
     -   Se utilizó MySQL y se debería haber usado MongoDB. Este punto no fue aclarado en el ejercicio original y opté por usar MySQL ya que considero que se acostumbra a guardar información vinculada a usuarios en bases de datos relacionales ya que después se relacionará con otras actividades que realizará el mismo. Por eso en principio se utilizó Sequelize y en el cambio de motor de base de datos a MongoDB se usa Mongoose.
     -   Encriptación de contraseña. Al no haber un punto específico respecto al registro de datos se optó por no recurrir a la encriptación. Con el agregado de la funcionalidad de registro se utiliza Bcrypt.
     -   Validación de datos del lado del servidor. No lo consideré necesario por los fines del ejercicio y por los tiempos brindados. Fue agregado.
-    -   Personalmente considero que realicé el ejercicio según los requerimientos, con diversos agregados que no excedieran lo que debía hacer. Estuve de acuerdo con algunas correcciones salvo en el caso de uso de una base de datos no especificada, la encriptación de datos cuando no se solicita un proceso de registros, el "no uso" de componentes en frontend cuando claramente se usaron siempre que fue necesario (por lo menos desde el punto de vista de un Junior) y el diseño sencillo del sitio (no se solicitó ninguna pauta en cuanto al diseño ni siquiera en la solicitud de empleo, sobre todo cuando buscaban un Desarrollador Full Stack Javascript). La transcripción del ejercicio es tal cual lo solicitado (salvo el "agregado personal", el cual se aclara), así que se puede apreciar qué se pide realmente.
 
 <hr>
 
