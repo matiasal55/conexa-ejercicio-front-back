@@ -13,7 +13,7 @@ const emailValidate = (message = 'Debe ingresar un email válido') => {
 };
 
 const passwordValidate = (message = 'Debe ingresar una contraseña') => {
-    return textValidate(message);
+    return yup.string().required(message).trim();
 };
 
 const repasswordValidate = (message = 'Las contraseñas ingresadas no coinciden') => {
